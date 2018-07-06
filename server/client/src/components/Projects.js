@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { fetchProject, fetchProjectNames } from '../actions';
 

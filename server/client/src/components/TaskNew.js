@@ -100,7 +100,8 @@ class TaskNew extends Component {
             ref={el => this.inputDescription = el}
             type="text"
             className="form-control"
-            placeholder="Enter a description" />
+            placeholder="Enter a description" >
+          </textarea>
           <button
             onClick={this.cancelNewTask}
             className="btn text-danger cancel">
