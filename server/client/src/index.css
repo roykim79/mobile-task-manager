@@ -1,0 +1,404 @@
+body {
+  background-color: rgb(255, 252, 229);
+  /* background-color: #fff; */
+  font-family: 'Open Sans', 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+a {
+  color: inherit;
+}
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+.bpb-1 {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 2%;
+}
+
+.mb-1 {
+  margin-bottom: 10px;
+}
+
+.mt-1 {
+  margin-top: 10px;
+}
+
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.wrapper {
+  overflow: auto;
+  padding: 1.5%;
+  position: relative;
+}
+
+/************************** Typography ***************************/
+.text-info.options {
+  /* text-decoration: underline; */
+}
+.text-info svg {
+  font-size: 1.5em;
+  display: inline-block;
+  position: relative;
+  top: -2px;
+}
+
+.text-info:hover {
+  color: rgb(82, 112, 255);
+  color: #999;
+  cursor: pointer;
+  text-decoration: underline;
+
+}
+
+.task-title {
+  font-size: 1.75em;
+}
+
+.sm {
+  font-size: .8em;
+}
+
+.project-preview .name {
+  font-size: 2em;
+}
+
+/************************** Projects ***************************/
+.add-project {
+  font-size: .4em;
+}
+
+.project-preview {
+  border : 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 2%;
+}
+
+.projects-list .header {
+  border-bottom : 1px solid #ddd;
+  font-size: 2.5em;
+  padding: 2%;
+}
+
+.label {
+  font-size: .5em;
+}
+
+
+/************************** Project ***************************/
+.project-view .header {
+  background-color: #DDD;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.project-view .header .project-name {
+  font-size: 2.25em;
+}
+
+.project-tasks a {
+  color: #000;
+}
+
+.project-tasks a:hover {
+  text-decoration: none;
+}
+
+/************************** Headers ***************************/
+header {
+  border-bottom: 1px solid #ddd;
+}
+.header {
+  clear: both;
+}
+.header .back {
+  float: left;
+}
+
+.header .create-new-task {
+  float: right;
+}
+
+.header-options {
+  background-color: #fff;
+  overflow: auto;
+}
+
+.profile-image {
+  border-radius: 50%;
+}
+
+.sub-header .actions {
+  position: relative;
+  top: 15px;
+}
+
+.actions .menu {
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+}
+
+/* .user-info {
+  float: right;
+} */
+
+/************************** Menus ***************************/
+.select {
+  position: relative;
+}
+.select .menu {
+  position: absolute;
+}
+.main-menu {
+  position: absolute;
+}
+
+.user-menu {
+  background: #fff;
+  bottom: -10px;
+  right: 0;
+  position: absolute;
+  z-index: 9999;
+}
+
+
+
+.view,
+.task,
+.new-task {
+  background-color: #fff;
+  border: 1px solid #999;
+}
+
+h2.project-name {
+  display: inline-block;
+  font-weight: 300;
+  font-size: 2em;
+  margin: 0;
+  padding: 5px;
+}
+
+.project-header {
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  text-align: center;
+}
+
+.labels-container {
+  display: inline-block;
+}
+
+.task-label {
+  border-radius: 7px;
+  color: #fff;
+  display: inline-block;
+  font-size: .7em;
+  margin-left: 1%;
+  padding: 2px 6px;
+}
+
+.task-label.red {
+  background-color: red;
+}
+
+.task-label.green {
+  background-color: green;
+}
+
+.task-label.blue {
+  background-color: #f2d600;
+}
+
+.glyphicon-menu-hamburger {
+  float:left;
+}
+
+.task-id,
+.task-status,
+.project-header .glyphicon-plus {
+  float: right;
+}
+
+.task-preview {
+  border-bottom: 1px solid #ddd;
+}
+
+.task-description-preview,
+.task-details-preview {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.glyphicon {
+  color: #999;
+}
+
+.glyphicon:hover {
+  cursor: pointer;
+}
+
+.glyphicon-menu-hamburger {
+  line-height: 41px;
+  margin-left: 2%
+}
+
+.list-header .glyphicon-plus {
+  line-height: 41px;
+  margin-right: 2%;
+}
+
+/********************* Menu**********************/
+
+.menu {
+  background: #fff;
+  border: 1px solid #000;
+  /* height: 300px; */
+  overflow: scroll;
+  /* width: 65%; */
+  z-index: 1;
+}
+
+.menu-section-header {
+  font-weight: 300;
+  padding: 2%;
+}
+
+.menu ul {
+  border-bottom: 1px solid #eee;
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  padding: 10px;
+  padding-left: 5%;
+}
+
+.menu li:hover {
+  cursor: pointer;
+}
+
+.menu .active,
+.menu li:hover {
+  background-color: #eee;
+  font-weight: bold;
+}
+
+.menu .prompt {
+  padding: 2%;
+}
+
+.menu .glyphicon {
+  margin-right: 2%;
+}
+
+.task-assignee-status {
+  position: relative;
+}
+
+.status-select .menu {
+  position: absolute;
+  right: 0;
+  width: 30%;
+}
+
+/********************* Task *********************/
+.task {
+  background-color: rgb(255, 252, 229);
+  clear: both;
+}
+.task .glyphicon-edit {
+  margin-left: 2%;
+}
+
+.task-activity-item {
+  border-bottom: 1px solid #eee;
+}
+
+.task-header {
+  border-bottom: 1px solid #eee;
+  padding: 2%;
+  position: relative;
+}
+
+.task .task-list-name {
+  vertical-align: top;
+}
+
+.task input:not(:focus),
+.task textarea:not(:focus) {
+  background-color: rgb(255, 252, 229);
+  border: 2px solid rgb(255, 252, 229);
+  padding-left: none;
+}
+
+.task textarea {
+  resize: none;
+}
+
+
+
+.section-label {
+  font-family: "Arial";
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 2%;
+}
+
+/*/********************* New Task /**********************/
+.new-task {
+  clear: both;
+  padding: 2%;
+}
+
+.new-task input {
+  margin-bottom: 2%;
+}
+
+.cancel {
+  text-decoration: underline;
+  margin-right: 2%;
+}
+
+.cancel:hover {
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
