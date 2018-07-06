@@ -1,3 +1,27 @@
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
 body {
   background-color: rgb(255, 252, 229);
   font-family: 'Open Sans', 'Arial', sans-serif;
@@ -39,12 +63,6 @@ ul {
 
 /************************** Typography ***************************/
 
-.text-info svg {
-  font-size: 1.5em;
-  display: inline-block;
-  position: relative;
-  top: -2px;
-}
 
 .text-info:hover {
   color: rgb(82, 112, 255);
