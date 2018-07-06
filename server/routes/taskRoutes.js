@@ -17,7 +17,7 @@ module.exports = app => {
   })
   
   // POST - add new Task
-  app.post('/api/tasks', requireLogin, (req, res) => {
+  app.post('/api/tasks', (req, res) => {
     const { title, description, project, assignedTo } = req.body;
 
     // create new Task

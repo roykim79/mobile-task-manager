@@ -5,7 +5,7 @@ const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
   // POST - add a new Project
-  app.post('/api/projects', requireLogin, (req, res) => {
+  app.post('/api/projects', (req, res) => {
     const project = new Project({
       name: req.body.name,
       tasks: []
