@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchProject, fetchTask } from '../actions';
 import * as FontAwesome from 'react-icons/lib/fa';
-import AlertIcon from 'mdi-react/AlertIcon';
-import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
 
 import TaskPreview from './TaskPreview';
 
@@ -39,7 +37,6 @@ class Project extends Component {
             </div>
             <div className="wrapper sub-header">
                 <span className="project-name">
-                <AlertIcon color="#000" />
                   {currentProject.name}
                 </span>
                 <span className="text-info actions fr">
