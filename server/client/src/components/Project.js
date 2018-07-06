@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchProject, fetchTask } from '../actions';
 import * as FontAwesome from 'react-icons/lib/fa';
-// import AlertIcon from 'mdi-react/AlertIcon';
-import { AlertIcon, AlertCircleIcon } from 'mdi-react';
+import AlertIcon from 'mdi-react/AlertIcon';
+import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
 
 import TaskPreview from './TaskPreview';
 
