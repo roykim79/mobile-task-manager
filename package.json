@@ -2,9 +2,9 @@
   "name": "trello-mobile",
   "version": "1.0.0",
   "description": "",
-  "main": "server/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "cd server && node index.js",
+    "start": "node server/index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
