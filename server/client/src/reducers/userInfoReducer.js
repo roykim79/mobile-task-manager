@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { FETCH_USER_INFO } from '../actions/types';
 
 export default function (state = {}, action) {
