@@ -3,7 +3,6 @@ import React from 'react';
 const TaskPreview = (props) => {
   return (
     <div
-      // onClick={() => { onClick(task._id) }}
       className="task-preview wrapper">
       <div className="task-details text-muted">
       </div>

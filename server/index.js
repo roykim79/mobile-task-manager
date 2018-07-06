@@ -5,9 +5,7 @@ const passport = require('passport');
 const keys = require('./config/keys');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-// require('./models/Label');
-// require('./models/Project');
-// require('./models/Task');
+
 require('./models/User');
 require('./services/passport');
 

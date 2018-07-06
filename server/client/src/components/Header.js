@@ -4,14 +4,19 @@ import { connect } from 'react-redux';
 class Header extends Component {
   render() {
     const { photo, firstName, lastName } = this.props.userInfo;
-    return (
-      <header className="wrapper">
-        <img className="profile-image fr"
-          src={photo}
-          alt={`${firstName} ${lastName}`} />
-          <div className="user-menu">Logout</div>
-      </header>
-    );
+    if (this.props.userInfo) {
+
+      return (
+        <header className="wrapper">
+          <img className="profile-image fr"
+            src={photo}
+            alt={`${firstName} ${lastName}`} />
+            <div className="user-menu">Logout</div>
+        </header>
+      );
+    } else {
+      return <div></div>;
+    }
   }
 }
 
