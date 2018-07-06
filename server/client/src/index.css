@@ -1,6 +1,5 @@
 body {
   background-color: rgb(255, 252, 229);
-  /* background-color: #fff; */
   font-family: 'Open Sans', 'Arial', sans-serif;
   margin: 0;
   padding: 0;
@@ -39,9 +38,7 @@ ul {
 }
 
 /************************** Typography ***************************/
-.text-info.options {
-  /* text-decoration: underline; */
-}
+
 .text-info svg {
   font-size: 1.5em;
   display: inline-block;
@@ -145,10 +142,6 @@ header {
   bottom: -50px;
 }
 
-/* .user-info {
-  float: right;
-} */
-
 /************************** Menus ***************************/
 .select {
   position: relative;
@@ -167,8 +160,6 @@ header {
   position: absolute;
   z-index: 9999;
 }
-
-
 
 .view,
 .task,
@@ -260,9 +251,7 @@ h2.project-name {
 .menu {
   background: #fff;
   border: 1px solid #000;
-  /* height: 300px; */
   overflow: scroll;
-  /* width: 65%; */
   z-index: 1;
 }
 
@@ -343,8 +332,6 @@ h2.project-name {
 .task textarea {
   resize: none;
 }
-
-
 
 .section-label {
   font-family: "Arial";

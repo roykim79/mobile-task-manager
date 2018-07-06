@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage" : "http://roykim79.github.io/mobile-task-manager",
+  "homepage" : "http://mobile-task-manager.herokuapp.com/",
   "scripts": {
     "start": "node server/index.js",
     "server": "nodemon index.js",

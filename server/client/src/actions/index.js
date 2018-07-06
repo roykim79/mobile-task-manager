@@ -13,13 +13,6 @@ export const createTask = (task) => {
   return { type: CREATE_TASK, payload: res };
 };
 
-//////////////////////////////////////////////////////
-// export const createTask = (task) => {
-//   const res = axios.post('/api/projects/:projectId/tasks', task);
-
-//   return { type: CREATE_TASK, payload: res };
-// };
-//////////////////////////////////////////////////////
 export const deleteTask = (projectId, taskId) => {
   const res = axios.delete(`/api/projects/${projectId}/tasks/${taskId}`);
 

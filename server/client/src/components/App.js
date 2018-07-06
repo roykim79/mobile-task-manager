@@ -16,8 +16,6 @@ class App extends Component {
     this.props.fetchUser();
     this.props.fetchUserInfo();
     this.props.fetchProjectNames();
-
-    console.log(this.props.currentProject);
   }
   
   render() {
