@@ -34,6 +34,8 @@ class Task extends Component {
       .then(() => {
         this.setState({ ...this.props.task });
       })
+      console.log("state: ", this.state)
+      console.log("props: ", this.props)
   }
 
   deleteTask = () => {
@@ -122,7 +124,7 @@ class Task extends Component {
               value={this.state.description}>
             </textarea>
           </div>
-          <div className="section-label">Activity</div>
+          {/* <div className="section-label">Activity</div>
           <ul className="task-activity">
             <li className="task-activity-item">
               [John Doe created new task Buy Groceries in list Features]<br />
@@ -132,7 +134,7 @@ class Task extends Component {
               [John Doe created new task Buy Groceries in list Features]<br />
               <span className="task-timestamp text-muted sm">[Jun 23 9:05am]</span>
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
     )
