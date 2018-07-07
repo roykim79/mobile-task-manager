@@ -13,15 +13,15 @@ class Projects extends Component {
     if (Array.isArray(this.props.projectNames)) {
       return (
         <div className="projects-list">
-          <div >
-            <h2 className="header">
-              Projects
+          <div className="header">
+          <i className="material-icons left">menu</i>
+
+            Projects
             <Link to='/createProject'>
-              <span className="add-project text-info sm fr">
-                + Project
+              <span className="create-new add-project text-info fr">
+                <i className="material-icons">add_circle_outline</i>
               </span>
             </Link>
-            </h2>
           </div>
 
           {this.props.projectNames.map((project) => {
@@ -30,8 +30,11 @@ class Projects extends Component {
                 onClick={() => { this.props.history.push(`/projects/${project._id}`) }}
                 key={project._id}
                 // projectId={project._id}
-                className="project-preview">
-                <span className="name">{project.name}</span>
+                className="project-preview rel">
+                <span className="name">
+                <i className="material-icons muted left">list_alt</i>
+                {project.name}
+                </span>
               </div>
             )
           })}

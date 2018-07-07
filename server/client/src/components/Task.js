@@ -118,7 +118,7 @@ class Task extends Component {
           </div>
           <div className="section-label mt-1">Description</div>
           <div className="task-description bpb-1">
-            <textarea className="form-control" name="" id=""
+            <textarea className="form-control" name="" rows="5"
               onBlur={this.updateTask}
               onChange={e => this.setState({ description: e.target.value })}
               value={this.state.description}>

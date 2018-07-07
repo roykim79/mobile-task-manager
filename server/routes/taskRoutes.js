@@ -2,20 +2,7 @@ const Task = require("../models/Task");
 const Project = require('../models/Project');
 const requireLogin = require('../middlewares/requireLogin');
 
-module.exports = app => {
-  // GET all Tasks
-  app.get('/api/tasks', (req, res) => {
-    Task.find({})
-      .populate('project')
-      .exec((err, tasks) => {
-      if (err) {
-        throw err;
-      } else {
-        return res.send(tasks);
-      }
-    })
-  })
-  
+module.exports = app => {  
   // POST - add new Task
   app.post('/api/tasks', (req, res) => {
     const { title, description, project, assignedTo } = req.body;

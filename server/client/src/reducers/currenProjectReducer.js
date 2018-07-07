@@ -10,7 +10,6 @@ export default function (state = {}, action) {
     case FETCH_PROJECT:
       return action.payload.data;
     case DELETE_TASK:
-    debugger;
       return action.payload.data;
     default:
       return state;

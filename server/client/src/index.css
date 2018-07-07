@@ -22,16 +22,72 @@
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
+
+.slide-from-right-short {
+	position: relative;
+	-webkit-animation-duration: .6s;
+	   -moz-animation-duration: .6s;
+	    -ms-animation-duration: .6s;
+	        animation-duration: .6s;
+	-webkit-animation-name: slideFromRightShort;
+	   -moz-animation-name: slideFromRightShort;
+	    -ms-animation-name: slideFromRightShort;
+	        animation-name: slideFromRightShort;
+	-webkit-animation-timing-function: linear;
+	   -moz-animation-timing-function: linear;
+	    -ms-animation-timing-function: linear;
+		    animation-timing-function: linear;
+}
+@-webkit-keyframes slideFromRightShort {
+	0%  { transform: translateX(100vw);  opacity: .2; }
+	100% { transform: translateX(0vw);    opacity: 1; }
+}
+@-moz-keyframes slideFromRightShort {
+	0%  { transform: translateX(100vw);  opacity: .2; }
+	100% { transform: translateX(0vw);    opacity: 1; }
+}
+@-ms-keyframes slideFromRightShort {
+	0%  { transform: translateX(100vw);  opacity: .2; }
+	100% { transform: translateX(0vw);    opacity: 1; }
+}
+@keyframes slideFromRightShort {
+	0%  { transform: translateX(100vw);  opacity: .2; }
+	100% { transform: translateX(0vw);    opacity: 1; }
+}
+
 body {
-  background-color: rgb(255, 252, 229);
+  background-color: #fff;;
   font-family: 'Open Sans', 'Arial', sans-serif;
   margin: 0;
   padding: 0;
 }
+
 a {
   color: inherit;
+  text-decoration: none;
 }
+
+button {
+  border-radius: 2px;
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 1em;
+  height: 40px;
+  /* width: 100px; */
+  padding: 5px 10px;
+}
+
+input {
+  box-sizing: border-box;
+  font-size: 1em;
+  padding: 2px 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  line-height: 2em;
+}
+
 ul {
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -41,6 +97,9 @@ ul {
   padding-bottom: 2%;
 }
 
+.action:hover {
+  cursor: pointer;
+}
 .mb-1 {
   margin-bottom: 10px;
 }
@@ -55,68 +114,96 @@ ul {
 .fr {
   float: right;
 }
+
+.rel {
+  position: relative;
+}
 .wrapper {
   overflow: auto;
-  padding: 1.5%;
+  padding: 10px;
   position: relative;
 }
 
 /************************** Typography ***************************/
+a:hover {
+  color: inherit;
+}
 
-
+.muted {
+  color: #999;
+}
 .text-info:hover {
-  color: rgb(82, 112, 255);
   color: #999;
   cursor: pointer;
   text-decoration: underline;
-
-}
-
-.task-title {
-  font-size: 1.75em;
 }
 
 .sm {
   font-size: .8em;
 }
 
-.project-preview .name {
-  font-size: 2em;
+/************************** Header ***************************/
+.header {
+  background-color: #0D47A1;
+  box-shadow: 0 2px 2px  #aaa;
+  color: #fff;
+  font-size: 1.25em;
+  padding: 15px;
+  position: relative;
+  text-align: center;
 }
 
-/************************** Projects ***************************/
-.add-project {
-  font-size: .4em;
-}
-
-.project-preview {
-  border : 1px solid #ddd;
-  margin-bottom: 10px;
-  padding: 2%;
-}
-
-.projects-list .header {
-  border-bottom : 1px solid #ddd;
-  font-size: 2.5em;
-  padding: 2%;
-}
-
-.label {
-  font-size: .5em;
-}
-
-
-/************************** Project ***************************/
-.project-view .header {
-  background-color: #DDD;
+.form-header {
+  font-size: 1.25em;
+  padding: 15px;
   border-bottom: 1px solid #ddd;
   text-align: center;
 }
 
-.project-view .header .project-name {
-  font-size: 2.25em;
+/************************** Material Icons ***************************/
+.material-icons.left {
+  position: absolute;
+  left: 5%;
+  top: 30%;
 }
 
+.material-icons.right {
+  position: absolute;
+  right: 20px;
+  top: 30%;
+}
+
+.material-icons.br {
+  position: fixed;
+  bottom: 30px;;
+  right: 20px;
+}
+
+.material-icons.create-new {
+  background-color: #fff;
+  border-radius: 50%;
+  color: #303F9F;
+  font-size: 60px;
+}
+
+
+
+/************************** Projects ***************************/
+.project-preview {
+  border-bottom : 1px solid #ddd;
+  margin: 0;
+  padding: 2%;
+}
+
+.project-preview .name {
+  font-size: 1.5em;
+  font-weight: lighter;
+  margin-left: 15%;
+}
+
+
+
+/************************** Project ***************************/
 .project-tasks a {
   color: #000;
 }
@@ -125,40 +212,32 @@ ul {
   text-decoration: none;
 }
 
-/************************** Headers ***************************/
-header {
+.task-preview {
   border-bottom: 1px solid #ddd;
 }
-.header {
-  clear: both;
-}
-.header .back {
-  float: left;
+
+.task-preview .task-title {
+  font-size: 1.25em;
 }
 
-.header .create-new-task {
-  float: right;
+.task-preview .task-description {
+  height: 48px;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.header-options {
-  background-color: #fff;
-  overflow: auto;
+.task-description-preview,
+.task-details-preview {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.profile-image {
-  border-radius: 50%;
-}
+/************************** ProjectNew ***************************/
 
-.sub-header .actions {
-  position: relative;
-  top: 15px;
-}
 
-.actions .menu {
-  position: absolute;
-  right: 0;
-  bottom: -50px;
-}
+
 
 /************************** Menus ***************************/
 .select {
@@ -235,34 +314,7 @@ h2.project-name {
   float: right;
 }
 
-.task-preview {
-  border-bottom: 1px solid #ddd;
-}
 
-.task-description-preview,
-.task-details-preview {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.glyphicon {
-  color: #999;
-}
-
-.glyphicon:hover {
-  cursor: pointer;
-}
-
-.glyphicon-menu-hamburger {
-  line-height: 41px;
-  margin-left: 2%
-}
-
-.list-header .glyphicon-plus {
-  line-height: 41px;
-  margin-right: 2%;
-}
 
 /********************* Menu**********************/
 
@@ -297,14 +349,6 @@ h2.project-name {
 .menu li:hover {
   background-color: #eee;
   font-weight: bold;
-}
-
-.menu .prompt {
-  padding: 2%;
-}
-
-.menu .glyphicon {
-  margin-right: 2%;
 }
 
 .task-assignee-status {
@@ -368,14 +412,7 @@ h2.project-name {
   margin-bottom: 2%;
 }
 
-.cancel {
-  text-decoration: underline;
-  margin-right: 2%;
-}
 
-.cancel:hover {
-  cursor: pointer;
-}
 
 
 

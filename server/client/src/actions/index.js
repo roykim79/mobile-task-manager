@@ -7,8 +7,8 @@ export const createProject = (name) => {
   return { type: CREATE_PROJECT, payload: res };
 };
 
-export const createTask = (task) => {
-  const res = axios.post('/api/tasks', task);
+export const createTask = (projectId, task) => {
+  const res = axios.post(`/api/projects/${projectId}`, task);
 
   return { type: CREATE_TASK, payload: res };
 };

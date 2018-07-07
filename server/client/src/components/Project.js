@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchProject, fetchTask } from '../actions';
-import * as FontAwesome from 'react-icons/lib/fa';
 
 import TaskPreview from './TaskPreview';
 
@@ -13,39 +12,21 @@ class Project extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { currentProject } = this.props;
 
     if (currentProject.tasks) {
       return (
-        <div className="project-view">
+        <div className="project-view rel">
           <div className="header">
-            <div className="header-options wrapper">
-              <Link className="back text-info" to='/projects' >
-              
-                <span><FontAwesome.FaCaretLeft />Projects</span>
-              </Link>
-              
-              {/* <span className="name"></span> */}
-              <Link className="create-new-task"
-                to={{
-                  pathname: '/createTask',
-                  state: { project: currentProject }
-                }}>
-                 <span className="text-info"><FontAwesome.FaPlus /></span>   
-              </Link>
-            </div>
-            <div className="wrapper sub-header">
-                <span className="project-name">
-                  {currentProject.name}
-                </span>
-                <span className="text-info actions fr">
-                  <FontAwesome.FaEllipsisV />
-                  <div className="menu">
-                    <div className="action">Delete Project</div>
-                  </div>
-                </span>
-            </div>
+            <Link to='/projects' >
+              <i className="material-icons left">arrow_back_ios</i>
+            </Link>
+            <span className="project-name">
+              {currentProject.name}
+            </span>
+            <span className="actions">
+              <i className="material-icons action right">delete_outline</i>
+            </span>
           </div>
           <ul className="project-tasks">
             {currentProject.tasks.map((task) => {
@@ -56,6 +37,12 @@ class Project extends Component {
               );
             })}
           </ul>
+          <Link to={{
+            pathname: '/createTask',
+            state: { project: currentProject }
+          }}>
+            <i className="material-icons create-new br">add_circle</i>
+          </Link>
         </div>
       )
     } else {
@@ -66,7 +53,7 @@ class Project extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, currentProject ,userInfo }) => {
+const mapStateToProps = ({ auth, currentProject, userInfo }) => {
   return { auth, currentProject, userInfo };
 }
 

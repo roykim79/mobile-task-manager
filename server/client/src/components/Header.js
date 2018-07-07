@@ -8,7 +8,7 @@ class Header extends Component {
 
       return (
         <header className="wrapper">
-          <img className="profile-image fr"
+          <img className="profile-image fr slide-from-right-short"
             src={photo}
             alt={`${firstName} ${lastName}`} />
             <div className="user-menu">Logout</div>
