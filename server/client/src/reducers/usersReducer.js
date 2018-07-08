@@ -1,8 +1,8 @@
-import { FETCH_PROJECT_NAMES } from '../actions/types';
+import { FETCH_USERS } from '../actions/types';
 
 export default function (state = {}, action) {
   switch (action.type) {
-    case FETCH_PROJECT_NAMES:
+    case FETCH_USERS:
       return action.payload.data;
     default:
       return state;

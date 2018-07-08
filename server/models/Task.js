@@ -27,10 +27,6 @@ const TaskSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Project'
   },
-  labels: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Label'
-  }],
   lastUpdated: {
     type: Date,
     default: Date.now

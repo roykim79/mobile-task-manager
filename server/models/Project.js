@@ -6,11 +6,7 @@ const ProjectSchema = new Schema({
   dateCreated: {
     type: Date,
     default: Date.now
-  },
-  tasks: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Task'
-  }]
+  }
 })
 
 module.exports = mongoose.model('Project', ProjectSchema);

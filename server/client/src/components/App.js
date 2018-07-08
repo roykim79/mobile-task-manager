@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-import Header from './Header';
 import Landing from './Landing';
 import ProjectNew from './ProjectNew';
 import TaskNew from './TaskNew';
@@ -15,7 +14,7 @@ class App extends Component {
   componentDidMount = () => {
     this.props.fetchUser();
     this.props.fetchUserInfo();
-    this.props.fetchProjectNames();
+    this.props.fetchProjects();
   }
   
   render() {

@@ -8,7 +8,7 @@ const TaskPreview = (props) => {
       <div className="task-title">{props.title}</div>
       <div className="task-description muted">{props.description}</div>
       <div className="task-assignee-status sm">
-        <span className="task-assignee">{props.assignee.firstName} {props.assignee.lastName}</span>
+        <span className="task-assignee">{props.assignedTo.firstName} {props.assignedTo.lastName}</span>
         <span className="task-status">{props.status}</span>
       </div>
     </div>

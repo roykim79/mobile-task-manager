@@ -3,8 +3,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import * as FontAwesome from 'react-icons/lib/fa';
-import { deleteTask, fetchProjectNames, fetchTask, updateTask } from '../actions';
+import { deleteTask, fetchTask, fetchUsers, updateTask } from '../actions';
 
 class Task extends Component {
   constructor(props) {
@@ -25,23 +24,37 @@ class Task extends Component {
       status: "Not Started",
       statuses: ['Not started', 'In progress', 'Completed'],
       statusSelectVisible: false,
-      task: { title: "", description: "" }
+      userSelectVisible: false
     }
   }
 
-  componentDidMount = () => {
-    this.props.fetchTask(this.props.match.params.taskId)
-      .then(() => {
-        this.setState({ ...this.props.task });
-      })
-      console.log("state: ", this.state)
-      console.log("props: ", this.props)
+  componentDidMount = async () => {
+    await this.props.fetchTask(this.props.match.params.taskId);
+    await this.props.fetchUsers();
+    this.setState({ ...this.props.task });
+    console.log(this.state)
   }
 
   deleteTask = () => {
     const { project, _id } = this.state;
-    this.props.deleteTask(project._id, _id)
+    this.props.deleteTask(_id)
     this.props.history.push(`/projects/${project._id}`);
+  }
+
+  handleStatusCaret = () => {
+    if (this.state.statusSelectVisible) {
+      return 'arrow_drop_up';
+    } else {
+      return 'arrow_drop_down';
+    }
+  }
+
+  handleUsersCaret = () => {
+    if (this.state.userSelectVisible) {
+      return 'arrow_drop_up';
+    } else {
+      return 'arrow_drop_down';
+    }
   }
 
   handleStatusLinks = () => {
@@ -64,8 +77,32 @@ class Task extends Component {
     }
   }
 
+  handleUserLinks = () => {
+    if (this.state.userSelectVisible) {
+      return (
+        <ul className="menu">
+          {this.props.users.map((user, i) => {
+            return (
+              <li className={"status " + (user === this.state.assingedTo ? "active" : "normal")}
+                onClick={() => { this.updateUser(user) }}
+                key={i} >
+                {user.firstName} {user.lastName}
+              </li>
+            );
+          })}
+        </ul>
+      )
+    } else {
+      return <div></div>;
+    }
+  }
+
   toggleStatusList = () => {
     this.setState({ statusSelectVisible: !this.state.statusSelectVisible })
+  }
+
+  toggleUserList = () => {
+    this.setState({ userSelectVisible: !this.state.userSelectVisible })
   }
 
   updateStatus = async (status) => {
@@ -75,23 +112,33 @@ class Task extends Component {
   }
 
   updateTask = () => {
-    const { title, description, status, _id } = this.state;
-    const updatedTask = { title, description, status };
+    const { title, description, status, _id, assignedTo } = this.state;
+    const updatedTask = { title, description, status, assignedTo };
 
     axios.put(`/api/tasks/${_id}`, updatedTask);
+  }
+
+  updateUser = async (user) => {
+    await this.setState({ assignedTo: user });
+    this.setState({ userSelectVisible: !this.state.userSelectVisible })
+    this.updateTask();
   }
 
   render() {
     return (
       <div className="task">
-        <div className="task-header header-options">
-          <Link className="back text-info" to={`/projects/${this.state.project._id}`} >
-          <FontAwesome.FaCaretLeft />{this.state.project.name}
+
+        <div className="header">
+          <Link to={`/projects/${this.state.project._id}`} >
+            <i className="material-icons left">arrow_back_ios</i>
+            {this.state.project.name}
           </Link>
-          <span className="text-info fr"
-            onClick={this.deleteTask}>
-              <FontAwesome.FaTrash />
-            </span>
+          <span className="project-name">
+          </span>
+          <span className="actions">
+            <i className="material-icons right"
+              onClick={this.deleteTask}>delete_outline</i>
+          </span>
         </div>
         <div className="task-body wrapper">
           <div className="task-details">
@@ -104,17 +151,27 @@ class Task extends Component {
               value={this.state.title} />
           </div>
           <div className="task-assignee-status bpb-1">
-            <span className="task-assignee text-muted" title="Assign to">
-              {this.state.assignedTo.firstName} {this.state.assignedTo.lastName}
+            <span className="user-select">
+              <span className="task-assignee abs action" title="Assign to"
+                onClick={this.toggleUserList}>
+                {this.state.assignedTo.firstName} {this.state.assignedTo.lastName}
+                <i className="material-icons drop-down">{this.handleUsersCaret()}</i>
+              </span>
+              <div className="select">
+                {this.handleUserLinks()}
+              </div>
             </span>
-            <span className="task-status text-info"
+
+            <span className="task-status action"
               onClick={this.toggleStatusList}
               title="Update status">
               {this.state.status}
+              <i className="material-icons drop-down">{this.handleStatusCaret()}</i>
             </span>
             <div className="select status-select">
               {this.handleStatusLinks()}
             </div>
+
           </div>
           <div className="section-label mt-1">Description</div>
           <div className="task-description bpb-1">
@@ -141,12 +198,12 @@ class Task extends Component {
   }
 }
 
-const mapStateToProps = ({ currentProject, projects, task }) => {
-  return { currentProject, projects, task };
+const mapStateToProps = ({ currentProject, projects, task, users }) => {
+  return { currentProject, projects, task, users };
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ deleteTask, fetchProjectNames, fetchTask, updateTask }, dispatch);
+  return bindActionCreators({ deleteTask, fetchTask, fetchUsers, updateTask }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Task);

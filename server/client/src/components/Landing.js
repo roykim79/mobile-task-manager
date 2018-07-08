@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchUser } from '../actions';
+import GoogleButton from 'react-google-button'
 
 class Landing extends Component {
   componentDidMount = async () => {
@@ -15,9 +17,13 @@ class Landing extends Component {
 
   render() {
     return (
-      <div>
-        <h1 className="landing-title">Trello Mobile</h1>
-        <a href="/auth/google">Login with Google</a>
+      <div className="landing cnt">
+        <div className="header">
+        </div>
+        <h1 className="landing-title">Task Manager</h1>
+        <GoogleButton className="google-button"
+          onClick={() => { this.props.history.push('/auth/google') }}
+        />
       </div>
     );
   }

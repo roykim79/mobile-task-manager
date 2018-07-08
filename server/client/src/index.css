@@ -24,11 +24,11 @@
 }
 
 .slide-from-right-short {
-	position: relative;
-	-webkit-animation-duration: .6s;
-	   -moz-animation-duration: .6s;
-	    -ms-animation-duration: .6s;
-	        animation-duration: .6s;
+	/* position: relative; */
+	-webkit-animation-duration: .4s;
+	   -moz-animation-duration: .4s;
+	    -ms-animation-duration: .4s;
+	        animation-duration: .4s;
 	-webkit-animation-name: slideFromRightShort;
 	   -moz-animation-name: slideFromRightShort;
 	    -ms-animation-name: slideFromRightShort;
@@ -39,20 +39,20 @@
 		    animation-timing-function: linear;
 }
 @-webkit-keyframes slideFromRightShort {
-	0%  { transform: translateX(100vw);  opacity: .2; }
-	100% { transform: translateX(0vw);    opacity: 1; }
+	0%  { transform: translateX(-100vw); }
+	100% { transform: translateX(0vw); }
 }
 @-moz-keyframes slideFromRightShort {
-	0%  { transform: translateX(100vw);  opacity: .2; }
-	100% { transform: translateX(0vw);    opacity: 1; }
+	0%  { transform: translateX(-100vw); }
+	100% { transform: translateX(0vw); }
 }
 @-ms-keyframes slideFromRightShort {
-	0%  { transform: translateX(100vw);  opacity: .2; }
-	100% { transform: translateX(0vw);    opacity: 1; }
+	0%  { transform: translateX(-100vw); }
+	100% { transform: translateX(0vw); }
 }
 @keyframes slideFromRightShort {
-	0%  { transform: translateX(100vw);  opacity: .2; }
-	100% { transform: translateX(0vw);    opacity: 1; }
+	0%  { transform: translateX(-100vw); }
+	100% { transform: translateX(0vw); }
 }
 
 body {
@@ -68,22 +68,40 @@ a {
 }
 
 button {
-  border-radius: 2px;
+  border-radius: 5px;
   display: inline-block;
   margin-right: 10px;
   font-size: 1em;
   height: 40px;
-  /* width: 100px; */
   padding: 5px 10px;
 }
 
-input {
+button:hover {
+  cursor: pointer;
+  color: #0D47A1;
+}
+
+.google-button {
+  display: inline-block!important;
+  width: 40%!important;
+}
+
+input, textarea {
   box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 5px;
   font-size: 1em;
   padding: 2px 5px;
-  margin-bottom: 10px;
   width: 100%;
   line-height: 2em;
+  -webkit-appearance: none;
+  -moz-appearance:    none;
+  appearance:         none;
+  resize: none;
+}
+
+textarea {
+  border-color: #ddd;
 }
 
 ul {
@@ -97,9 +115,10 @@ ul {
   padding-bottom: 2%;
 }
 
-.action:hover {
-  cursor: pointer;
+.cnt {
+  text-align: center;
 }
+
 .mb-1 {
   margin-bottom: 10px;
 }
@@ -111,13 +130,20 @@ ul {
 .fl {
   float: left;
 }
+
 .fr {
   float: right;
+}
+
+.abs {
+  position: absolute;
+  width: 100%;
 }
 
 .rel {
   position: relative;
 }
+
 .wrapper {
   overflow: auto;
   padding: 10px;
@@ -125,17 +151,28 @@ ul {
 }
 
 /************************** Typography ***************************/
+h1 {
+  font-weight: lighter;
+}
+
 a:hover {
   color: inherit;
 }
 
+.action {
+  color: #2196F3;
+}
+
+.cancel {
+  color: #D32F2F;
+}
+
+.action:hover {
+  cursor: pointer;
+}
+
 .muted {
   color: #999;
-}
-.text-info:hover {
-  color: #999;
-  cursor: pointer;
-  text-decoration: underline;
 }
 
 .sm {
@@ -182,8 +219,15 @@ a:hover {
 .material-icons.create-new {
   background-color: #fff;
   border-radius: 50%;
+  padding: 0;
   color: #303F9F;
   font-size: 60px;
+}
+
+.material-icons.drop-down {
+  top: 6px;
+  position: relative;
+  display: inline-block;
 }
 
 
@@ -201,6 +245,10 @@ a:hover {
   margin-left: 15%;
 }
 
+.create-new-project input {
+  margin-bottom: 10px;
+}
+
 
 
 /************************** Project ***************************/
@@ -212,6 +260,15 @@ a:hover {
   text-decoration: none;
 }
 
+.no-tasks {
+  padding: 20% 0;
+  text-align: center;
+}
+
+.no-tasks .material-icons {
+  font-size: 72px;
+}
+
 .task-preview {
   border-bottom: 1px solid #ddd;
 }
@@ -221,7 +278,7 @@ a:hover {
 }
 
 .task-preview .task-description {
-  height: 48px;
+  max-height: 48px;
   line-height: 24px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -234,20 +291,56 @@ a:hover {
   text-overflow: ellipsis;
 }
 
+
 /************************** ProjectNew ***************************/
 
 
 
 
 /************************** Menus ***************************/
+.mask {
+  display: none;
+  -webkit-animation-duration: .6s;
+  -moz-animation-duration: .6s;
+   -ms-animation-duration: .6s;
+       animation-duration: .6s;
+}
+
+.mask.visible {
+  display: block;
+  position: absolute;
+  background-color: rgba(0, 0, 0, .5);
+  width: 100%;
+  height: 100vh;
+}
+
 .select {
   position: relative;
 }
+
 .select .menu {
   position: absolute;
 }
-.main-menu {
+
+#main-menu {
+  /* left: 100%; */
+  display: none;
+  /* position: absolute; */
+  transition: width 2s;
+  width: 0;
+}
+
+#main-menu.visible {
+  left: 0;
+  width: 0;
+}
+
+
+#main-menu.visible {
+  display: block;
   position: absolute;
+  width: 60%;
+  z-index: 2;
 }
 
 .user-menu {
@@ -258,20 +351,20 @@ a:hover {
   z-index: 9999;
 }
 
-.view,
+/* .view,
 .task,
 .new-task {
   background-color: #fff;
   border: 1px solid #999;
-}
-
+} */
+/* 
 h2.project-name {
   display: inline-block;
   font-weight: 300;
   font-size: 2em;
   margin: 0;
   padding: 5px;
-}
+} */
 
 .project-header {
   border-bottom: 1px solid #ddd;
@@ -279,55 +372,15 @@ h2.project-name {
   text-align: center;
 }
 
-.labels-container {
-  display: inline-block;
-}
-
-.task-label {
-  border-radius: 7px;
-  color: #fff;
-  display: inline-block;
-  font-size: .7em;
-  margin-left: 1%;
-  padding: 2px 6px;
-}
-
-.task-label.red {
-  background-color: red;
-}
-
-.task-label.green {
-  background-color: green;
-}
-
-.task-label.blue {
-  background-color: #f2d600;
-}
-
-.glyphicon-menu-hamburger {
-  float:left;
-}
-
-.task-id,
-.task-status,
-.project-header .glyphicon-plus {
-  float: right;
-}
-
-
 
 /********************* Menu**********************/
 
 .menu {
   background: #fff;
-  border: 1px solid #000;
+  border: 1px solid #ddd;
   overflow: scroll;
   z-index: 1;
-}
-
-.menu-section-header {
-  font-weight: 300;
-  padding: 2%;
+  width: 30%;
 }
 
 .menu ul {
@@ -337,8 +390,10 @@ h2.project-name {
 }
 
 .menu li {
+  background-color: #fff;
   padding: 10px;
-  padding-left: 5%;
+  min-width: 300px;
+  /* padding-left: 5%; */
 }
 
 .menu li:hover {
@@ -348,7 +403,6 @@ h2.project-name {
 .menu .active,
 .menu li:hover {
   background-color: #eee;
-  font-weight: bold;
 }
 
 .task-assignee-status {
@@ -358,16 +412,16 @@ h2.project-name {
 .status-select .menu {
   position: absolute;
   right: 0;
-  width: 30%;
+  /* width: 30%; */
+}
+
+.user-selct .menu {
+  position: absolute;
 }
 
 /********************* Task *********************/
 .task {
-  background-color: rgb(255, 252, 229);
   clear: both;
-}
-.task .glyphicon-edit {
-  margin-left: 2%;
 }
 
 .task-activity-item {
@@ -384,15 +438,34 @@ h2.project-name {
   vertical-align: top;
 }
 
+.task .task-title {
+  margin-bottom: 10px;
+}
+
+.task-assignee {
+  left: 0;
+  bottom: 8px;
+}
+
+.task-title input {
+  font-size: 1.25em;
+  margin-bottom: 20px;
+}
+
 .task input:not(:focus),
 .task textarea:not(:focus) {
-  background-color: rgb(255, 252, 229);
-  border: 2px solid rgb(255, 252, 229);
+  border: 2px solid #fff;
   padding-left: none;
 }
 
-.task textarea {
-  resize: none;
+.task-status {
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+}
+
+.task-preview .task-status {
+  bottom: 0px;
 }
 
 .section-label {
@@ -403,13 +476,18 @@ h2.project-name {
 }
 
 /*/********************* New Task /**********************/
-.new-task {
+/* .new-task {
   clear: both;
-  padding: 2%;
-}
+} */
 
 .new-task input {
   margin-bottom: 2%;
+}
+
+.select-project-name {
+  display: inline-block;
+  margin-bottom: 2%;
+  padding: 2px;
 }
 
 

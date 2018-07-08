@@ -21,13 +21,14 @@ app.use(
     maxAge: 30 * 24 * 60 * 60 * 1000,
     keys: [keys.cookieKey]
   })
-)
-app.use(passport.initialize())
-app.use(passport.session())
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
-require('./routes/authRoutes')(app)
-require('./routes/projectRoutes')(app)
-require('./routes/taskRoutes')(app)
+require('./routes/authRoutes')(app);
+require('./routes/projectRoutes')(app);
+require('./routes/taskRoutes')(app);
+require('./routes/userRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets

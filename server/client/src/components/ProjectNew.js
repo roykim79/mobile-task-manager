@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createProject, fetchProjectNames } from '../actions';
+import { createProject, fetchProjects } from '../actions';
 
 class MainMenu extends Component {
   constructor() {
@@ -42,8 +42,8 @@ class MainMenu extends Component {
               className="cancel">
               Cancel
           </button>
-            <button type="submit" className="add">
-              Add
+            <button type="submit" className="action">
+              Create
           </button>
           </form>
         </div>
@@ -58,7 +58,7 @@ const mapStateToProps = ({ projects }) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ createProject, fetchProjectNames }, dispatch);
+  return bindActionCreators({ createProject, fetchProjects }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainMenu);
