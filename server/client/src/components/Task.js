@@ -43,17 +43,17 @@ class Task extends Component {
 
   handleStatusCaret = () => {
     if (this.state.statusSelectVisible) {
-      return 'arrow_drop_up';
+      return 'expand_less';
     } else {
-      return 'arrow_drop_down';
+      return 'expand_more';
     }
   }
 
   handleUsersCaret = () => {
     if (this.state.userSelectVisible) {
-      return 'arrow_drop_up';
+      return 'expand_less';
     } else {
-      return 'arrow_drop_down';
+      return 'expand_more';
     }
   }
 
@@ -127,71 +127,78 @@ class Task extends Component {
   render() {
     return (
       <div className="task">
-
         <div className="header">
           <Link to={`/projects/${this.state.project._id}`} >
-            <i className="material-icons left">arrow_back_ios</i>
-            {this.state.project.name}
+            <i className="material-icons fl">arrow_back_ios</i>
+            <span className="ml-20">
+              {this.state.project.name}
+            </span>
           </Link>
           <span className="project-name">
           </span>
-          <span className="actions">
-            <i className="material-icons right"
-              onClick={this.deleteTask}>delete_outline</i>
-          </span>
+          <i className="material-icons fr"
+            onClick={this.deleteTask}>delete</i>
         </div>
-        <div className="task-body wrapper">
-          <div className="task-details">
 
-          </div>
+        <div className="task-body border">
           <div className="task-title">
-            <input type="text"
-              onBlur={this.updateTask}
-              onChange={e => this.setState({ title: e.target.value })}
-              value={this.state.title} />
-          </div>
-          <div className="task-assignee-status p-1 bpb-1">
-            <span className="user-select">
-              <span className="task-assignee action" title="Assign to"
-                onClick={this.toggleUserList}>
-                {this.state.assignedTo.firstName} {this.state.assignedTo.lastName}
-                <i className="material-icons drop-down">{this.handleUsersCaret()}</i>
-              </span>
-              <div className="select">
-                {this.handleUserLinks()}
-              </div>
-            </span>
-
-            <span className="task-status action"
-              onClick={this.toggleStatusList}
-              title="Update status">
-              {this.state.status}
-              <i className="material-icons drop-down">{this.handleStatusCaret()}</i>
-            </span>
-            <div className="select status-select">
-              {this.handleStatusLinks()}
+            <div className="section-label wrapper">Title</div>
+            <div className="wrapper-thin">
+              <input type="text"
+                onBlur={this.updateTask}
+                onChange={e => this.setState({ title: e.target.value })}
+                value={this.state.title} />
             </div>
+          </div>
 
+          <div className="task-details">
+            <div className="section-label wrapper">Details</div>
+            <div className="task-assignee-status rel wrapper">
+              <div className="user-select fl">
+
+                <div className="task-assignee action" title="Assign to"
+                  onClick={this.toggleUserList}>
+                  <span>
+                    {this.state.assignedTo.firstName} {this.state.assignedTo.lastName}
+                  </span>
+                  <i className="material-icons expand-more">{this.handleUsersCaret()}</i>
+                </div>
+
+                <div className="select">
+                  {this.handleUserLinks()}
+                </div>
+
+              </div>
+
+              <div className="status-select fr">
+
+                <div className="task-status action"
+                  onClick={this.toggleStatusList}
+                  title="Update status">
+                  <span>
+                    {this.state.status}
+                  </span>
+                  <i className="material-icons expand-more">{this.handleStatusCaret()}</i>
+                </div>
+
+                <div className="select">
+                  {this.handleStatusLinks()}
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="section-label mt-1">Description</div>
-          <div className="task-description bpb-1">
-            <textarea className="form-control" name="" rows="5"
-              onBlur={this.updateTask}
-              onChange={e => this.setState({ description: e.target.value })}
-              value={this.state.description}>
-            </textarea>
+
+          <div className="mt-1 btb">
+            <div className="section-label wrapper">Description</div>
+            <div className="task-description wrapper-thin">
+              <textarea className="form-control" name="" rows="5"
+                onBlur={this.updateTask}
+                onChange={e => this.setState({ description: e.target.value })}
+                value={this.state.description}>
+              </textarea>
+            </div>
           </div>
-          {/* <div className="section-label">Activity</div>
-          <ul className="task-activity">
-            <li className="task-activity-item">
-              [John Doe created new task Buy Groceries in list Features]<br />
-              <span className="task-timestamp text-muted sm">[Jun 23 9:05am]</span>
-            </li>
-            <li className="task-activity-item">
-              [John Doe created new task Buy Groceries in list Features]<br />
-              <span className="task-timestamp text-muted sm">[Jun 23 9:05am]</span>
-            </li>
-          </ul> */}
+
         </div>
       </div>
     )

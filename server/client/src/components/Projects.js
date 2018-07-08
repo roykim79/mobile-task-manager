@@ -25,52 +25,49 @@ class Projects extends Component {
     if (Array.isArray(this.props.projects)) {
       return (
         <div className="projects-list">
-          <div className="header">
-            <i className="material-icons left"
-              onClick={e => this.setState({ menuVisible: !this.state.menuVisible })}>menu</i>
+          <div className="header rel">
+            <i className="material-icons fl"
+              onClick={e => this.setState({ menuVisible: !this.state.menuVisible })}>
+              menu
+            </i>
             Projects
             <Link to='/createProject'>
-              <span className="create-new add-project text-info fr">
-                <i className="material-icons">add_circle_outline</i>
-              </span>
+              <i className="material-icons fr">add_circle_outline</i>
             </Link>
-          </div>
 
-          <div className="rel">
-            <div className="abs">
-              {this.props.projects.map((project) => {
-                return (
-                  <div
-                    onClick={() => this.handleProjectClick(project)}
-                    key={project._id}
-                    className="project-preview rel">
-                    <span className="name">
-                      <i className="material-icons muted left">list_alt</i>
-                      {project.name}
-                    </span>
-                  </div>
-                )
-              })}
-            </div>
-            <div className={"mask slide-from-right-short " + (this.state.menuVisible ? 'visible' : '')}></div>
-            <ul className={"menu " + (this.state.menuVisible ? 'visible' : '')} id="main-menu">
-              <li className="user-info sm muted rel">
+            <ul className={"rel menu " + (this.state.menuVisible ? 'visible' : '')} id="main-menu">
+              <li className="user-info sm muted">
                 <span>
                   Logged in as {this.props.userInfo.firstName}<br />
                   {this.props.userInfo.email}
                 </span>
                 <img src={this.props.userInfo.photo} alt="" />
               </li>
-              <li>
+              <li className="logout">
                 <Link to='/api/logout'>Logout</Link>
               </li>
             </ul>
           </div>
 
+          <div className="rel">
+            {this.props.projects.map((project) => {
+              return (
+                <div
+                  onClick={() => this.handleProjectClick(project)}
+                  key={project._id}
+                  className="project-preview rel">
+                  <span className="name">
+                    <i className="material-icons muted mr-8">arrow_forward_ios</i>
+                    {project.name}
+                  </span>
+                </div>
+              )
+            })}
+          </div>
         </div>
       );
     } else {
-      return <div></div>;
+      return <div>Opps, something went wrong</div>;
     }
   }
 }

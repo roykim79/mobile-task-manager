@@ -14,7 +14,6 @@ const ProjectLinks = (props) => {
               onClick={() => {props.handleClick(project)}}
               key={project._id} 
               className={"project " + (props.currentSelection._id === project._id ? "active" : "normal")}>
-              <span className="glyphicon glyphicon-tasks"></span>
               <span>{project.name}</span>
             </li>
           )

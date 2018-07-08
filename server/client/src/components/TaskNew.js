@@ -58,9 +58,9 @@ class TaskNew extends Component {
 
   handleCaret = () => {
     if (this.state.projectSelectVisible) {
-      return "arrow_drop_up";
+      return "expand_less";
     } else {
-      return 'arrow_drop_down'
+      return 'expand_more'
     }
   }
 
@@ -87,7 +87,7 @@ class TaskNew extends Component {
       <div className="new-task">
         <div className="header">
           <Link to={`/projects/${this.state.project._id}`} >
-            <i className="material-icons left">arrow_back_ios</i>
+            <i className="material-icons fl">arrow_back_ios</i>
           </Link>
           <span>
             New Task
@@ -100,11 +100,11 @@ class TaskNew extends Component {
         <form className="wrapper"
           onSubmit={this.createTask}
           action="">
-          <div className="select select-project-name">
+          <div className="select select-project-name mb-8">
             <div className="project-name action"
               onClick={this.toggleProjectList}>
               {this.state.project.name}
-              <i className="material-icons drop-down">{this.handleCaret()}</i>
+              <i className="material-icons expand-more">{this.handleCaret()}</i>
             </div>
             {this.handleProjectLinks()}
           </div>
@@ -122,7 +122,7 @@ class TaskNew extends Component {
             Cancel
           </button>
           <span className="create-task">
-            <button type="submit" className="action">
+            <button type="submit" className="action create">
               Create task
             </button>
           </span>

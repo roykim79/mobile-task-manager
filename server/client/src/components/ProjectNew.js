@@ -25,7 +25,7 @@ class MainMenu extends Component {
       <div>
         <div className="header rel">
           <Link to='/projects' >
-            <i className="material-icons left">arrow_back_ios</i>
+            <i className="material-icons fl">arrow_back_ios</i>
           </Link>
           New Project
         </div>
@@ -42,7 +42,7 @@ class MainMenu extends Component {
               className="cancel">
               Cancel
           </button>
-            <button type="submit" className="action">
+            <button type="submit" className="action create">
               Create
           </button>
           </form>

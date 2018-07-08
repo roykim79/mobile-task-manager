@@ -23,43 +23,17 @@
   font-feature-settings: 'liga';
 }
 
-.slide-from-right-short {
-	/* position: relative; */
-	-webkit-animation-duration: .2s;
-	   -moz-animation-duration: .2s;
-	    -ms-animation-duration: .2s;
-	        animation-duration: .2s;
-	-webkit-animation-name: slideFromRightShort;
-	   -moz-animation-name: slideFromRightShort;
-	    -ms-animation-name: slideFromRightShort;
-	        animation-name: slideFromRightShort;
-	-webkit-animation-timing-function: linear;
-	   -moz-animation-timing-function: linear;
-	    -ms-animation-timing-function: linear;
-		    animation-timing-function: linear;
-}
-@-webkit-keyframes slideFromRightShort {
-	0%  { transform: translateX(-100vw); }
-	100% { transform: translateX(0vw); }
-}
-@-moz-keyframes slideFromRightShort {
-	0%  { transform: translateX(-100vw); }
-	100% { transform: translateX(0vw); }
-}
-@-ms-keyframes slideFromRightShort {
-	0%  { transform: translateX(-0); }
-	100% { transform: translateX(0vw); }
-}
-@keyframes slideFromRightShort {
-	0%  { opacity: 0; }
-	100% { opacity: 1; }
-}
-
 body {
-  background-color: #fff;;
+  background-color: #fff;
+  color:#555;
   font-family: 'Open Sans', 'Arial', sans-serif;
+  font-weight: lighter;
   margin: 0;
   padding: 0;
+}
+
+i, span {
+  display: inline-block;
 }
 
 a {
@@ -70,7 +44,7 @@ a {
 button {
   border-radius: 5px;
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 8px;
   font-size: 1em;
   height: 40px;
   padding: 5px 10px;
@@ -86,24 +60,31 @@ button:hover {
   width: 40%!important;
 }
 
+input {
+  line-height: 2em;
+}
+
 input, textarea {
   box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1em;
   padding: 2px 5px;
+  margin-bottom: 4px;
   width: 100%;
-  line-height: 2em;
-  -webkit-appearance: none;
+  /* -webkit-appearance: none;
   -moz-appearance:    none;
-  appearance:         none;
+  appearance:         none; */
   resize: none;
 }
 
+textarea {
+  line-height: 20px;
+  padding: 8px;
+}
+
 input:focus, textarea:focus {
-  border: none;
   outline-width: 1px;
-  outline-offset: 0;
   outline-style: none;
 }
 
@@ -121,17 +102,21 @@ ul {
   list-style: none;
 }
 
-.bpb-1 {
+/* .bpb-1 {
   border-bottom: 1px solid #ddd;
   padding-bottom: 2%;
-}
+} */
 
 .cnt {
   text-align: center;
 }
 
-.mb-1 {
-  margin-bottom: 10px;
+.mb-8 {
+  margin-bottom: 8px;
+}
+
+.mr-8 {
+  margin-right: 8px;
 }
 
 .mt-1 {
@@ -148,17 +133,49 @@ ul {
 
 .abs {
   position: absolute;
-  width: 100%;
+  z-index: 999;
+}
+
+.abs-r {
+  position: absolute;
+  right: 0;
+  /* overflow: auto; */
 }
 
 .rel {
   position: relative;
+  overflow: auto;
+}
+
+.pt-2 {
+  padding-top: 20px;
+}
+
+.pt-4 {
+  padding-top: 4px;
+}
+
+.pt-8 {
+  padding-top: 8px;
+}
+
+.wrapper,
+.wrapper-thin {
+  clear: both;
+  position: relative;
+  overflow: auto;
 }
 
 .wrapper {
-  overflow: auto;
-  padding: 10px;
-  position: relative;
+  padding: 8px;
+}
+
+.wrapper-thin {
+  margin: 4px;
+}
+
+.z {
+  z-index: 9999;
 }
 
 /************************** Typography ***************************/
@@ -171,15 +188,33 @@ a:hover {
 }
 
 .action {
-  color: #2196F3;
+  color: rgb(244, 112, 55);
 }
 
-.cancel {
-  color: #D32F2F;
+.action.create {
+  color: rgb(9, 123, 237);
+}
+
+.border {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.bb {
+  border-bottom: 1px solid #ddd;
+}
+
+.btb {
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
 }
 
 .action:hover {
   cursor: pointer;
+}
+
+.cancel {
+  color: #D32F2F;
 }
 
 .muted {
@@ -192,10 +227,12 @@ a:hover {
 
 /************************** Header ***************************/
 .header {
-  background-color: #0D47A1;
+  background-color: rgb(48, 48, 48);
   box-shadow: 0 2px 2px  #aaa;
   color: #fff;
+
   font-size: 1.25em;
+  line-height: 27px;
   padding: 15px;
   position: relative;
   text-align: center;
@@ -204,21 +241,23 @@ a:hover {
 .form-header {
   font-size: 1.25em;
   padding: 15px;
-  border-bottom: 1px solid #ddd;
   text-align: center;
 }
 
 /************************** Material Icons ***************************/
-.material-icons.left {
-  position: absolute;
-  left: 5%;
-  top: 30%;
-}
+/* .material-icons.left { */
+  /* position: absolute; */
+  /* left: 5%; */
+  /* top: 30%; */
+/* } */
 
-.material-icons.right {
-  position: absolute;
-  right: 20px;
-  top: 30%;
+/* .material-icons.right { */
+  /* position: absolute; */
+  /* right: 20px; */
+  /* top: 30%; */
+/* } */
+.material-icons {
+  color: rgb(244, 112, 55);
 }
 
 .material-icons.br {
@@ -231,12 +270,14 @@ a:hover {
   background-color: #fff;
   border-radius: 50%;
   padding: 0;
-  color: #303F9F;
+  color: rgb(244, 112, 55);
   font-size: 60px;
 }
 
-.material-icons.drop-down {
-  top: 6px;
+.material-icons.expand-more,
+.material-icons.drop_down,
+.material-icons.drop_up {
+  top: 8px;
   position: relative;
   display: inline-block;
 }
@@ -252,17 +293,20 @@ a:hover {
 .project-preview .name {
   font-size: 1.5em;
   font-weight: lighter;
-  margin-left: 15%;
+}
+
+.project-preview .material-icons {
+  line-height: 31px;
 }
 
 .create-new-project input {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 
 /************************** Project ***************************/
 .project-tasks a {
-  color: #000;
+  color: #555;
 }
 
 .project-tasks a:hover {
@@ -284,91 +328,47 @@ a:hover {
 
 .task-preview .task-title {
   font-size: 1.25em;
+  font-weight: bold;
+}
+
+.task-preview .task-assignee-status {
+  line-height: 20px;
+  overflow: auto;
+}
+
+.task-preview .task-assignee {
+  color: rgb(244, 112, 55);
+  /* bottom: 4px; */
+  position: relative;
+}
+
+.task-preview .task-status {
+  color: #fff;
+  bottom: 4px;
+  border-radius: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.task-status.red {
+  background-color: red;
+}
+
+.task-status.yellow {
+  background-color: yellow;
+  color: #666;
+}
+
+.task-status.green {
+  background-color: green;
 }
 
 .task-preview .task-description {
-  max-height: 40px;
-  line-height: 20px;
+  max-height: 36px;
+  line-height: 18px;
   overflow: hidden;
+  text-align: justify;
   text-overflow: ellipsis;
-}
-
-/************************** ProjectNew ***************************/
-
-
-
-
-/************************** Menus ***************************/
-.mask {
-  display: none;
-  -webkit-animation-duration: .6s;
-  -moz-animation-duration: .6s;
-   -ms-animation-duration: .6s;
-       animation-duration: .6s;
-}
-
-.mask.visible {
-  display: block;
-  position: absolute;
-  background-color: rgba(0, 0, 0, .5);
-  width: 100%;
-  height: 100vh;
-}
-
-.select {
-  position: relative;
-}
-
-.select .menu {
-  position: absolute;
-}
-
-#main-menu {
-  display: none;
-  transition: width 2s;
-  width: 0;
-}
-
-#main-menu img {
-  border-radius: 50%;
-  margin-left: 20px;
-  position: absolute;
-  top: 5px;
-  right: 15px;
-}
-
-#main-menu .user-info {
-  line-height: 20px;
-}
-
-li.user-info {
-  background-color: #eee!important;
-}
-
-#main-menu.visible {
-  left: 0;
-  width: 0;
-}
-
-#main-menu.visible {
-  display: block;
-  position: absolute;
-  width: 60%;
-  z-index: 2;
-}
-
-.user-menu {
-  background: #fff;
-  bottom: -10px;
-  right: 0;
-  position: absolute;
-  z-index: 9999;
-}
-
-.project-header {
-  border-bottom: 1px solid #ddd;
-  position: relative;
-  text-align: center;
 }
 
 /********************* Menu**********************/
@@ -377,6 +377,7 @@ li.user-info {
   background: #fff;
   border: 1px solid #ddd;
   overflow: scroll;
+  max-height: 200px;
   z-index: 1;
 }
 
@@ -388,9 +389,9 @@ li.user-info {
 
 .menu li {
   background-color: #fff;
-  padding: 10px;
-  min-width: 200px;
-  /* padding-left: 5%; */
+  border-bottom: 1px solid #eee;
+  padding: 10px 20px;
+  text-align: left;
 }
 
 .menu li:hover {
@@ -402,54 +403,105 @@ li.user-info {
   background-color: #eee;
 }
 
-li.user-info:hover {
+/************************** Menus ***************************/
+
+
+#main-menu {
+  display: none;
+  margin-top: 12px;
+}
+
+#main-menu.visible {
+  display: block;
+}
+
+#main-menu img {
+  border-radius: 50%;
+  margin-left: 20px;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+}
+
+#main-menu .user-info {
+  background-color: #eee!important;
+  line-height: 20px;
+}
+
+#main-menu .user-info:hover {
   background-color: #fff;
+  cursor: none;
 }
 
-.task-assignee-status {
-  position: relative;
+#main-menu.visible {
+  height: auto;
 }
 
-.status-select .menu {
-  position: absolute;
+#main-menu li.logout {
+  background-color: rgb(48, 48, 48);
+  border-bottom: none;
+  font-size: 16px;
+}
+
+#main-menu li.logout:hover {
+  background-color: rgb(100, 100, 100);
+  font-size: 16px;
+}
+
+.user-menu {
+  background: #fff;
+  bottom: -10px;
   right: 0;
-}
-
-.user-selct .menu {
   position: absolute;
 }
+
+.project-header {
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  text-align: center;
+}
+
 
 /********************* Task *********************/
 .task {
   clear: both;
 }
 
-.task-activity-item {
-  border-bottom: 1px solid #eee;
+.task .header {
+  text-align: left;
+}
+
+.task-details {
+  border-radius: 5px;
+}
+
+.task .project-name {
+  padding-left: 20%;
 }
 
 .task-header {
   border-bottom: 1px solid #eee;
-  padding: 2%;
   position: relative;
 }
 
-.task .task-list-name {
-  vertical-align: top;
+.task .task-assignee-status {
+  position: relative;
+  line-height: 20px;
 }
 
-.task .task-title {
-  margin-bottom: 10px;
+.task-status.action {
+  text-align: right;
 }
 
-.task-assignee {
-  left: 0;
-  bottom: 8px;
+.task .section-label {
+  background-color: #eee;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .task-title input {
   font-size: 1.25em;
-  margin-bottom: 20px;
 }
 
 .task input:not(:focus),
@@ -458,33 +510,20 @@ li.user-info:hover {
   padding-left: none;
 }
 
+.task input {
+  /* border: none; */
+  outline-width: 1px;
+  outline-offset: 0;
+  outline-style: none;
+}
+
 .task-status {
-  position: absolute;
   right: 0;
-  bottom: 8px;
-}
-
-.task-preview .task-status {
-  bottom: 0px;
-}
-
-.section-label {
-  font-family: "Arial";
-  font-size: 1.1em;
-  font-weight: bold;
-  margin-top: 2%;
 }
 
 /*/********************* New Task /**********************/
-
 .new-task input {
   margin-bottom: 2%;
-}
-
-.select-project-name {
-  display: inline-block;
-  margin-bottom: 2%;
-  padding: 2px;
 }
 
 

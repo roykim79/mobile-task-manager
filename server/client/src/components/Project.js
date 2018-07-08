@@ -71,15 +71,13 @@ class Project extends Component {
       <div className="project-view rel">
         <div className="header">
           <Link to='/projects' >
-            <i className="material-icons left">arrow_back_ios</i>
+            <i className="material-icons fl">arrow_back_ios</i>
           </Link>
           <span className="project-name">
             {currentProject.name}
           </span>
-          <span className="actions">
-            <i className="material-icons right"
-              onClick={this.handleDeleteClick}>delete_outline</i>
-          </span>
+          <i className="material-icons fr"
+            onClick={this.handleDeleteClick}>delete</i>
         </div>
         {this.renderTasks()}
         <Link to={{
