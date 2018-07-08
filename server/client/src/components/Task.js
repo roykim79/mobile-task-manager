@@ -107,7 +107,8 @@ class Task extends Component {
 
   updateStatus = async (status) => {
     await this.setState({ status: status });
-    this.setState({ statusSelectVisible: !this.state.statusSelectVisible })
+    this.toggleStatusList();
+    // this.setState({ statusSelectVisible: !this.state.statusSelectVisible })
     this.updateTask();
   }
 
@@ -120,7 +121,8 @@ class Task extends Component {
 
   updateUser = async (user) => {
     await this.setState({ assignedTo: user });
-    this.setState({ userSelectVisible: !this.state.userSelectVisible })
+    this.toggleUserList();
+    // this.setState({ userSelectVisible: !this.state.userSelectVisible })
     this.updateTask();
   }
 
@@ -191,7 +193,7 @@ class Task extends Component {
           <div className="mt-1 btb">
             <div className="section-label wrapper">Description</div>
             <div className="task-description wrapper-thin">
-              <textarea className="form-control" name="" rows="5"
+              <textarea className="form-control" name="" rows="10"
                 onBlur={this.updateTask}
                 onChange={e => this.setState({ description: e.target.value })}
                 value={this.state.description}>

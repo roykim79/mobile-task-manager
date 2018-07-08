@@ -3,10 +3,10 @@ const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
   // POST - create new Task
-  app.post('/api/tasks', requireLogin, (req, res) => {
+  app.post('/api/tasks', (req, res) => {
     const { title, description, project, assignedTo } = req.body;
     // create new Task
-    const task = new Task({ title, description, project,assignedTo });
+    const task = new Task({ title, description, project, assignedTo });
 
     // save new Task
     task.save((err, task) => {
@@ -19,7 +19,7 @@ module.exports = app => {
   })
 
   // GET Task by id
-  app.get('/api/tasks/:taskId', requireLogin, (req, res) => {
+  app.get('/api/tasks/:taskId', (req, res) => {
     Task.findById(req.params.taskId)
       .populate('project', 'name')
       .populate('assignedTo')
@@ -33,7 +33,7 @@ module.exports = app => {
   })
 
   //DELETE a Task found by its id
-  app.delete('/api/tasks/:taskId', requireLogin, (req, res) => {
+  app.delete('/api/tasks/:taskId', (req, res) => {
     Task.deleteOne({
       _id: req.params.taskId
     }, (err, task) => {
@@ -46,7 +46,7 @@ module.exports = app => {
   })
 
   // PUT - Update task found by task id
-  app.put('/api/tasks/:taskId', requireLogin, (req, res) => {
+  app.put('/api/tasks/:taskId', (req, res) => {
     Task.findById(req.params.taskId)
       .exec((err, task) => {
         if (err) {

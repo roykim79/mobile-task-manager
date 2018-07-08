@@ -55,9 +55,13 @@ button:hover {
   color: #0D47A1;
 }
 
-.google-button {
-  display: inline-block!important;
-  width: 40%!important;
+.login {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #999;
+  display: inline-block;
+  padding: 15px 10px;
+  width: 40%;
 }
 
 input {
@@ -72,10 +76,9 @@ input, textarea {
   padding: 2px 5px;
   margin-bottom: 4px;
   width: 100%;
-  /* -webkit-appearance: none;
-  -moz-appearance:    none;
-  appearance:         none; */
   resize: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 textarea {
@@ -102,10 +105,9 @@ ul {
   list-style: none;
 }
 
-/* .bpb-1 {
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 2%;
-} */
+.bs {
+  box-shadow: 2px 2px 2px #999;
+}
 
 .cnt {
   text-align: center;
@@ -139,7 +141,6 @@ ul {
 .abs-r {
   position: absolute;
   right: 0;
-  /* overflow: auto; */
 }
 
 .rel {
@@ -226,11 +227,14 @@ a:hover {
 }
 
 /************************** Header ***************************/
+.landing .header {
+  height: 28px;
+}
+/************************** Header ***************************/
 .header {
   background-color: rgb(48, 48, 48);
-  box-shadow: 0 2px 2px  #aaa;
+  box-shadow: 2px 2px 2px  #aaa;
   color: #fff;
-
   font-size: 1.25em;
   line-height: 27px;
   padding: 15px;
@@ -245,17 +249,6 @@ a:hover {
 }
 
 /************************** Material Icons ***************************/
-/* .material-icons.left { */
-  /* position: absolute; */
-  /* left: 5%; */
-  /* top: 30%; */
-/* } */
-
-/* .material-icons.right { */
-  /* position: absolute; */
-  /* right: 20px; */
-  /* top: 30%; */
-/* } */
 .material-icons {
   color: rgb(244, 112, 55);
 }
@@ -281,7 +274,6 @@ a:hover {
   position: relative;
   display: inline-block;
 }
-
 
 /************************** Projects ***************************/
 .project-preview {
@@ -324,6 +316,10 @@ a:hover {
 
 .task-preview {
   border-bottom: 1px solid #ddd;
+}
+
+.task-title {
+  text-transform: capitalize;
 }
 
 .task-preview .task-title {

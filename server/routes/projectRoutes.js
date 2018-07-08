@@ -5,7 +5,7 @@ const ObjectId = require('mongodb').ObjectID;
 
 module.exports = app => {
   // POST - create new Project
-  app.post('/api/projects', requireLogin, (req, res) => {
+  app.post('/api/projects', (req, res) => {
     const project = new Project({
       name: req.body.name
     });
@@ -20,7 +20,7 @@ module.exports = app => {
   })
 
   // GET all Projects 
-  app.get('/api/projects', requireLogin, (req, res) => {
+  app.get('/api/projects', (req, res) => {
     Project.find({}, (err, projects) => {
       if (err) {
         throw err;
@@ -31,7 +31,7 @@ module.exports = app => {
   })
 
   // GET Project by id
-  app.get('/api/projects/:projectId', requireLogin, (req, res) => {
+  app.get('/api/projects/:projectId', (req, res) => {
     Project.findOne({_id: req.params.projectId}, (err, projects) => {
       if (err) {
         throw err;
@@ -42,7 +42,7 @@ module.exports = app => {
   })
 
   // GET all tasks for a Project found by project id with tasks populated
-  app.get('/api/projects/:projectId/tasks', requireLogin, (req, res) => {
+  app.get('/api/projects/:projectId/tasks', (req, res) => {
   Task.find( {'project': ObjectId(req.params.projectId) })
     .populate('assignedTo')
     .exec((err, tasks) => {
@@ -55,7 +55,7 @@ module.exports = app => {
   })
 
   // DELETE a project found by its id
-  app.delete('/api/projects/:projectId', requireLogin, (req, res) => {
+  app.delete('/api/projects/:projectId', (req, res) => {
     Project.deleteOne({_id: req.params.projectId}, (err, data) => {
       if (err) {
         throw err;
