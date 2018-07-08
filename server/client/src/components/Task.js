@@ -150,9 +150,9 @@ class Task extends Component {
               onChange={e => this.setState({ title: e.target.value })}
               value={this.state.title} />
           </div>
-          <div className="task-assignee-status bpb-1">
+          <div className="task-assignee-status p-1 bpb-1">
             <span className="user-select">
-              <span className="task-assignee abs action" title="Assign to"
+              <span className="task-assignee action" title="Assign to"
                 onClick={this.toggleUserList}>
                 {this.state.assignedTo.firstName} {this.state.assignedTo.lastName}
                 <i className="material-icons drop-down">{this.handleUsersCaret()}</i>

@@ -100,6 +100,17 @@ input, textarea {
   resize: none;
 }
 
+input:focus, textarea:focus {
+  border: none;
+  outline-width: 1px;
+  outline-offset: 0;
+  outline-style: none;
+}
+
+.p-1 {
+  padding: 10px;
+}
+
 textarea {
   border-color: #ddd;
 }
@@ -291,7 +302,6 @@ a:hover {
   text-overflow: ellipsis;
 }
 
-
 /************************** ProjectNew ***************************/
 
 
@@ -323,18 +333,31 @@ a:hover {
 }
 
 #main-menu {
-  /* left: 100%; */
   display: none;
-  /* position: absolute; */
   transition: width 2s;
   width: 0;
+}
+
+#main-menu img {
+  border-radius: 50%;
+  margin-left: 20px;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+}
+
+#main-menu .user-info {
+  line-height: 20px;
+}
+
+li.user-info {
+  background-color: #eee!important;
 }
 
 #main-menu.visible {
   left: 0;
   width: 0;
 }
-
 
 #main-menu.visible {
   display: block;
@@ -351,27 +374,11 @@ a:hover {
   z-index: 9999;
 }
 
-/* .view,
-.task,
-.new-task {
-  background-color: #fff;
-  border: 1px solid #999;
-} */
-/* 
-h2.project-name {
-  display: inline-block;
-  font-weight: 300;
-  font-size: 2em;
-  margin: 0;
-  padding: 5px;
-} */
-
 .project-header {
   border-bottom: 1px solid #ddd;
   position: relative;
   text-align: center;
 }
-
 
 /********************* Menu**********************/
 
@@ -380,7 +387,6 @@ h2.project-name {
   border: 1px solid #ddd;
   overflow: scroll;
   z-index: 1;
-  width: 30%;
 }
 
 .menu ul {
@@ -392,7 +398,7 @@ h2.project-name {
 .menu li {
   background-color: #fff;
   padding: 10px;
-  min-width: 300px;
+  min-width: 200px;
   /* padding-left: 5%; */
 }
 
@@ -405,6 +411,10 @@ h2.project-name {
   background-color: #eee;
 }
 
+li.user-info:hover {
+  background-color: #fff;
+}
+
 .task-assignee-status {
   position: relative;
 }
@@ -412,7 +422,6 @@ h2.project-name {
 .status-select .menu {
   position: absolute;
   right: 0;
-  /* width: 30%; */
 }
 
 .user-selct .menu {
@@ -476,9 +485,6 @@ h2.project-name {
 }
 
 /*/********************* New Task /**********************/
-/* .new-task {
-  clear: both;
-} */
 
 .new-task input {
   margin-bottom: 2%;

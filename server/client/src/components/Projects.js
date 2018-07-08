@@ -55,9 +55,12 @@ class Projects extends Component {
             </div>
             <div className={"mask " + (this.state.menuVisible ? 'visible' : '')}></div>
             <ul className={"menu " + (this.state.menuVisible ? 'visible' : '')} id="main-menu">
-              <li>
-              Logged in as {this.props.userInfo.firstName}
-              <img src={this.props.userInfo.photo} alt=""/>
+              <li className="user-info sm muted rel">
+                <span>
+                  Logged in as {this.props.userInfo.firstName}<br />
+                  {this.props.userInfo.email}
+                </span>
+                <img src={this.props.userInfo.photo} alt="" />
               </li>
               <li>
                 <Link to='/api/logout'>Logout</Link>
