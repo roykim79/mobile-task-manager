@@ -25,10 +25,10 @@
 
 .slide-from-right-short {
 	/* position: relative; */
-	-webkit-animation-duration: .4s;
-	   -moz-animation-duration: .4s;
-	    -ms-animation-duration: .4s;
-	        animation-duration: .4s;
+	-webkit-animation-duration: .2s;
+	   -moz-animation-duration: .2s;
+	    -ms-animation-duration: .2s;
+	        animation-duration: .2s;
 	-webkit-animation-name: slideFromRightShort;
 	   -moz-animation-name: slideFromRightShort;
 	    -ms-animation-name: slideFromRightShort;
@@ -47,12 +47,12 @@
 	100% { transform: translateX(0vw); }
 }
 @-ms-keyframes slideFromRightShort {
-	0%  { transform: translateX(-100vw); }
+	0%  { transform: translateX(-0); }
 	100% { transform: translateX(0vw); }
 }
 @keyframes slideFromRightShort {
-	0%  { transform: translateX(-100vw); }
-	100% { transform: translateX(0vw); }
+	0%  { opacity: 0; }
+	100% { opacity: 1; }
 }
 
 body {
@@ -242,7 +242,6 @@ a:hover {
 }
 
 
-
 /************************** Projects ***************************/
 .project-preview {
   border-bottom : 1px solid #ddd;
@@ -259,7 +258,6 @@ a:hover {
 .create-new-project input {
   margin-bottom: 10px;
 }
-
 
 
 /************************** Project ***************************/
@@ -289,15 +287,8 @@ a:hover {
 }
 
 .task-preview .task-description {
-  max-height: 48px;
-  line-height: 24px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.task-description-preview,
-.task-details-preview {
-  white-space: nowrap;
+  max-height: 40px;
+  line-height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
 }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { fetchProjects } from '../actions';
 
 class Projects extends Component {
@@ -53,7 +52,7 @@ class Projects extends Component {
                 )
               })}
             </div>
-            <div className={"mask " + (this.state.menuVisible ? 'visible' : '')}></div>
+            <div className={"mask slide-from-right-short " + (this.state.menuVisible ? 'visible' : '')}></div>
             <ul className={"menu " + (this.state.menuVisible ? 'visible' : '')} id="main-menu">
               <li className="user-info sm muted rel">
                 <span>
