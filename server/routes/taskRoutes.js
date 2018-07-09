@@ -1,21 +1,45 @@
 const Task = require("../models/Task");
 const requireLogin = require('../middlewares/requireLogin');
+const Mailer = require('../services/Mailer');
+const emailTemplate = require('../services/emailTemplate');
 
 module.exports = app => {
   // POST - create new Task
-  app.post('/api/tasks', (req, res) => {
+  app.post('/api/tasks', async (req, res) => {
     const { title, description, project, assignedTo } = req.body;
     // create new Task
     const task = new Task({ title, description, project, assignedTo });
 
+    ////////////////////////////////////////////////////////////////////
+    task.recipients = [assignedTo, assignedTo];
+    task._user = req.user._id;
+    task.dateSent = Date.now();
+    ////////////////////////////////////////////
+
+    const mailer = new Mailer(task, emailTemplate(task));
+
+    try {
+      await mailer.send();
+      await task.save();
+      // const user = await req.user.save();
+
+      res.send(task);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+
+    ////////////////////////////////////////////////////////////////////
     // save new Task
-    task.save((err, task) => {
-      if (err) {
-        throw err;
-      } else {
-        return res.send(task);
-      }
-    })
+    // task.save((err, task) => {
+    //   if (err) {
+    //     throw err;
+    //   } else {
+
+
+
+    //     return res.send(task);
+    //   }
+    // })
   })
 
   // GET Task by id
