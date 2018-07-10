@@ -19,7 +19,7 @@ const ProjectLinks = (props) => {
           )
         })}
       </ul>
-    )
+    );
   } else {
     return <div></div>;
   }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { fetchUser } from '../actions';
@@ -29,16 +28,7 @@ class Landing extends Component {
         <div className="header">
         </div>
         <h1 className="landing-title">Task Manager</h1>
-        <a className="login" href="/auth/google">
-        Google login
-        </a>
-        {/* <div onClick={this.submitLogin}
-          className="login">
-          Google login
-        </div> */}
-        {/* <GoogleButton className="google-button"
-          
-        /> */}
+        <a className="login" href="/auth/google">Google login</a>
       </div>
     );
   }

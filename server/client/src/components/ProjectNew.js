@@ -6,9 +6,9 @@ import { createProject, fetchProjects } from '../actions';
 
 class MainMenu extends Component {
   constructor() {
-    super()
+    super();
 
-    this.state = {}
+    this.state = {};
   }
 
   createProject = (e) => {
@@ -48,7 +48,6 @@ class MainMenu extends Component {
           </form>
         </div>
       </div>
-
     );
   }
 }

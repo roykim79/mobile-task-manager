@@ -6,7 +6,7 @@ import { fetchProjects } from '../actions';
 
 class Projects extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       menuVisible: false
@@ -14,11 +14,10 @@ class Projects extends Component {
   }
   componentDidMount = () => {
     this.props.fetchProjects();
-    console.log(this.props)
   }
 
   handleProjectClick = (project) => {
-    this.props.history.push(`/projects/${project._id}`)
+    this.props.history.push(`/projects/${project._id}`);
   }
 
   render() {
