@@ -1,4 +1,4 @@
 # mobile-task-manager
-An application that help the mobile user manage their projects with tasks
+An mobile application that helps teams manage their projects with tasks
 
 A live example can be seen at https://mobile-task-manager.herokuapp.com/
