@@ -11,9 +11,10 @@ module.exports = app => {
     const task = new Task({ title, description, project, assignedTo });
 
     ////////////////////////////////////////////////////////////////////
-    task.recipients = [assignedTo, assignedTo];
+    task.recipients = [assignedTo];
     task._user = req.user._id;
     task.dateSent = Date.now();
+    task.subject = "Hello";
     ////////////////////////////////////////////
 
     const mailer = new Mailer(task, emailTemplate(task));

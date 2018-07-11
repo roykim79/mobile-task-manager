@@ -13,7 +13,7 @@ class Mailer extends helper.Mail {
     this.recipients = this.formatAddresses(recipients);
 
     this.addContent(this.body);
-    this.addClickTracking();
+    // this.addClickTracking();
     this.addRecipients();
   }
 
@@ -23,13 +23,13 @@ class Mailer extends helper.Mail {
     });
   }
 
-  addClickTracking() {
-    const trackingSettings = new helper.TrackingSettings();
-    const clickTracking = new helper.ClickTracking(true, true);
+  // addClickTracking() {
+  //   const trackingSettings = new helper.TrackingSettings();
+  //   const clickTracking = new helper.ClickTracking(true, true);
 
-    trackingSettings.setClickTracking(clickTracking);
-    this.addTrackingSettings(trackingSettings);
-  }
+  //   trackingSettings.setClickTracking(clickTracking);
+  //   this.addTrackingSettings(trackingSettings);
+  // }
 
   addRecipients() {
     const personalize = new helper.Personalization();
@@ -46,8 +46,14 @@ class Mailer extends helper.Mail {
       path: '/v3/mail/send',
       body: this.toJSON()
     });
-  
-    const response = await this.sgApi.API(request);
+    
+    let response;
+    
+    try {
+      response = await this.sgApi.API(request);
+    } catch (err) {
+      console.error(err);
+    }
     return response;
   }
 }

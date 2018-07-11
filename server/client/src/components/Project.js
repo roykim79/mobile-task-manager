@@ -27,7 +27,7 @@ class Project extends Component {
     await this.props.fetchProject(this.props.match.params.projectId);
 
     this.setState({ currentProject: currentProject.data })
-    console.log(this.state)
+    console.log(this.props)
   }
 
   handleDeleteClick = () => {
