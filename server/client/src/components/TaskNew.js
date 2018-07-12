@@ -36,14 +36,14 @@ class TaskNew extends Component {
     this.setState({ projectSelectVisible: !this.state.projectSelectVisible });
   }
 
-  // create and send new task to the server
-  createTask = (e) => {
+  // send the new task to the 
+  createTask = async (e) => {
     e.preventDefault();
     const { description, project, title, assignedTo } = this.state;
     const newTask = { description, project, title, assignedTo }
 
     // send the task to the server, clear the inputs and send user back to the current project's page
-    this.props.createTask(newTask);
+    await this.props.createTask(newTask);
     this.clearInputs();
     this.props.history.push(`/projects/${project._id}`);
   }
