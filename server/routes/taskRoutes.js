@@ -10,37 +10,25 @@ module.exports = app => {
     // create new Task
     const task = new Task({ title, description, project, assignedTo });
 
-    ////////////////////////////////////////////////////////////////////
     task.recipients = [assignedTo];
     task._user = req.user._id;
     task.dateSent = Date.now();
     task.subject = "Hello";
-    ////////////////////////////////////////////
 
     const mailer = new Mailer(task, emailTemplate(task));
 
     try {
-      await mailer.send();
-      await task.save();
-      // const user = await req.user.save();
-
-      res.send(task);
+      mailer.send();
+      task.save((err, task) => {
+        if (err) {
+          throw err;
+        } else {
+          return res.send(task);
+        }
+      })
     } catch (err) {
       res.status(422).send(err);
     }
-
-    ////////////////////////////////////////////////////////////////////
-    // save new Task
-    // task.save((err, task) => {
-    //   if (err) {
-    //     throw err;
-    //   } else {
-
-
-
-    //     return res.send(task);
-    //   }
-    // })
   })
 
   // GET Task by id
