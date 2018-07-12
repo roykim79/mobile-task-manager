@@ -21,10 +21,8 @@ class TaskNew extends Component {
     const { location, userInfo, fetchProjects } = this.props;
 
     fetchProjects();
-
     this.setState({ assignedTo: userInfo, project: location.state.project }, () => {
-      console.log(this.props);
-    })
+    });
   }
 
   cancelNewTask = () => {
@@ -35,14 +33,13 @@ class TaskNew extends Component {
   // change the value of state.project to be submitted with the form
   changeProject = (project) => {
     this.setState({ project: project });
-    this.setState({ projectSelectVisible: !this.state.projectSelectVisible })
+    this.setState({ projectSelectVisible: !this.state.projectSelectVisible });
   }
 
   // send the new task to the 
   createTask = async (e) => {
     e.preventDefault();
     const { description, project, title, assignedTo } = this.state;
-    // create a new task object
     const newTask = { description, project, title, assignedTo }
 
     // send the task to the server, clear the inputs and send user back to the current project's page
@@ -60,7 +57,7 @@ class TaskNew extends Component {
     if (this.state.projectSelectVisible) {
       return "expand_less";
     } else {
-      return 'expand_more'
+      return 'expand_more';
     }
   }
 
@@ -72,14 +69,14 @@ class TaskNew extends Component {
           handleClick={this.changeProject}
           projects={this.props.projects}
           currentSelection={this.state.project} />
-      )
+      );
     } else {
       return <div></div>;
     }
   }
 
   toggleProjectList = () => {
-    this.setState({ projectSelectVisible: !this.state.projectSelectVisible })
+    this.setState({ projectSelectVisible: !this.state.projectSelectVisible });
   }
 
   render() {
@@ -92,10 +89,6 @@ class TaskNew extends Component {
           <span>
             New Task
           </span>
-          {/* <span className="actions">
-            <i className="material-icons action right"
-              onClick={this.handleDeleteClick}>delete_outline</i>
-          </span> */}
         </div>
         <form className="wrapper"
           onSubmit={this.createTask}

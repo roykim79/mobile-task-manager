@@ -32,12 +32,11 @@ class Task extends Component {
     await this.props.fetchTask(this.props.match.params.taskId);
     await this.props.fetchUsers();
     this.setState({ ...this.props.task });
-    console.log(this.state)
   }
 
   deleteTask = () => {
     const { project, _id } = this.state;
-    this.props.deleteTask(_id)
+    this.props.deleteTask(_id);
     this.props.history.push(`/projects/${project._id}`);
   }
 
@@ -98,17 +97,16 @@ class Task extends Component {
   }
 
   toggleStatusList = () => {
-    this.setState({ statusSelectVisible: !this.state.statusSelectVisible })
+    this.setState({ statusSelectVisible: !this.state.statusSelectVisible });
   }
 
   toggleUserList = () => {
-    this.setState({ userSelectVisible: !this.state.userSelectVisible })
+    this.setState({ userSelectVisible: !this.state.userSelectVisible });
   }
 
   updateStatus = async (status) => {
     await this.setState({ status: status });
     this.toggleStatusList();
-    // this.setState({ statusSelectVisible: !this.state.statusSelectVisible })
     this.updateTask();
   }
 
@@ -122,7 +120,6 @@ class Task extends Component {
   updateUser = async (user) => {
     await this.setState({ assignedTo: user });
     this.toggleUserList();
-    // this.setState({ userSelectVisible: !this.state.userSelectVisible })
     this.updateTask();
   }
 
@@ -141,7 +138,6 @@ class Task extends Component {
           <i className="material-icons fr"
             onClick={this.deleteTask}>delete</i>
         </div>
-
         <div className="task-body border">
           <div className="task-title">
             <div className="section-label wrapper">Title</div>
@@ -152,12 +148,10 @@ class Task extends Component {
                 value={this.state.title} />
             </div>
           </div>
-
           <div className="task-details">
             <div className="section-label wrapper">Details</div>
             <div className="task-assignee-status rel wrapper">
               <div className="user-select fl">
-
                 <div className="task-assignee action" title="Assign to"
                   onClick={this.toggleUserList}>
                   <span>
@@ -165,15 +159,11 @@ class Task extends Component {
                   </span>
                   <i className="material-icons expand-more">{this.handleUsersCaret()}</i>
                 </div>
-
                 <div className="select">
                   {this.handleUserLinks()}
                 </div>
-
               </div>
-
               <div className="status-select fr">
-
                 <div className="task-status action"
                   onClick={this.toggleStatusList}
                   title="Update status">
@@ -182,14 +172,12 @@ class Task extends Component {
                   </span>
                   <i className="material-icons expand-more">{this.handleStatusCaret()}</i>
                 </div>
-
                 <div className="select">
                   {this.handleStatusLinks()}
                 </div>
               </div>
             </div>
           </div>
-
           <div className="mt-1 btb">
             <div className="section-label wrapper">Description</div>
             <div className="task-description wrapper-thin">
@@ -200,10 +188,9 @@ class Task extends Component {
               </textarea>
             </div>
           </div>
-
         </div>
       </div>
-    )
+    );
   }
 }
 

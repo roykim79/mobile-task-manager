@@ -9,7 +9,7 @@ import TaskPreview from './TaskPreview';
 
 class Project extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       currentProject: {
@@ -21,17 +21,17 @@ class Project extends Component {
       }
     }
   }
+
   componentDidMount = async () => {
     const { projectId } = this.props.match.params;
-    let currentProject = await axios.get(`/api/projects/${projectId}`)
+    let currentProject = await axios.get(`/api/projects/${projectId}`);
     await this.props.fetchProject(this.props.match.params.projectId);
 
-    this.setState({ currentProject: currentProject.data })
-    console.log(this.props)
+    this.setState({ currentProject: currentProject.data });
   }
 
   handleDeleteClick = () => {
-    this.props.deleteProject(this.props.match.params.projectId)
+    this.props.deleteProject(this.props.match.params.projectId);
     this.props.history.push('/projects');
   }
 
@@ -87,7 +87,7 @@ class Project extends Component {
           <i className="material-icons create-new br">add_circle</i>
         </Link>
       </div>
-    )
+    );
   }
 }
 
