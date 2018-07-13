@@ -65,7 +65,8 @@ module.exports = app => {
         if (err) {
           throw err;
         } else {
-          Object.assign(task, req.body)
+          // task = {task, ...req.body}
+          Object.assign(task, req.body);
           task.save();
           return res.send(task);
         }
