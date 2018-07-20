@@ -12,8 +12,9 @@ module.exports = app => {
       if (err) {
         throw err;
       } else if (project) {
-        return res.status(400).send("Project name already exists");
+        return res.status(400).send("Project name already exists, duplicate project names are not allowed");
       }
+      
       const newProject = new Project({
         name
       });

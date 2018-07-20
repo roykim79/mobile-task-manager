@@ -13,11 +13,21 @@ class MainMenu extends Component {
 
   createProject = async (e) => {
     e.preventDefault();
-    const projectName = { name: this.state.newProjectName };
+    const { newProjectName } = this.state;
+    // check if project name already exists
+    const foundProject = this.props.projects.find((project) => {
+      return project.name = newProjectName;
+    });
 
-    await this.props.createProject(projectName);
-    this.inputNewProject.value = "";
-    this.props.history.push('/projects');
+    if (!foundProject) {
+      const projectName = { name: newProjectName };
+  
+      await this.props.createProject(projectName);
+      this.inputNewProject.value = "";
+      this.props.history.push('/projects');
+    } else {
+      alert("Duplicate project names are not allowed");
+    }
   }
 
   render() {
