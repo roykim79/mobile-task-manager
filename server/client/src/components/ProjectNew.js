@@ -11,11 +11,11 @@ class MainMenu extends Component {
     this.state = {};
   }
 
-  createProject = (e) => {
+  createProject = async (e) => {
     e.preventDefault();
     const projectName = { name: this.state.newProjectName };
 
-    this.props.createProject(projectName);
+    await this.props.createProject(projectName);
     this.inputNewProject.value = "";
     this.props.history.push('/projects');
   }

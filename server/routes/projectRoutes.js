@@ -6,17 +6,31 @@ const ObjectId = require('mongodb').ObjectID;
 module.exports = app => {
   // POST - create new Project
   app.post('/api/projects', requireLogin, (req, res) => {
-    const project = new Project({
-      name: req.body.name
-    });
-
-    project.save((err) => {
+    const { name } = req.body;
+    // check if project name exists in order to prevent duplicates
+    Project.findOne({name}, (err, project) => {
       if (err) {
         throw err;
-      } else {
-        return res.send(project);
+      } else if (project) {
+        return res.status(400).send("Project name already exists");
       }
-    });
+      const newProject = new Project({
+        name
+      });
+  
+      newProject.save((err) => {
+        if (err) {
+          throw err;
+        } else {
+          return res.send(newProject);
+        }
+      });
+    })
+
+
+
+
+
   });
 
   // GET all Projects 
