@@ -16,7 +16,7 @@ class MainMenu extends Component {
     const { newProjectName } = this.state;
     // check if project name already exists
     const foundProject = this.props.projects.find((project) => {
-      return project.name = newProjectName;
+      return project.name === newProjectName;
     });
 
     if (!foundProject) {

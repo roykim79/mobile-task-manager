@@ -27,7 +27,7 @@ body {
   background-color: #fff;
   color:#555;
   font-family: 'Open Sans', 'Arial', sans-serif;
-  font-weight: lighter;
+  /* font-weight: lighter; */
   margin: 0;
   padding: 0;
 }
@@ -323,8 +323,9 @@ a:hover {
 }
 
 .task-preview .task-title {
+  font-family: 'Open Sans';
   font-size: 1.25em;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .task-preview .task-assignee-status {
@@ -360,8 +361,10 @@ a:hover {
 }
 
 .task-preview .task-description {
-  max-height: 36px;
-  line-height: 18px;
+  /* font-family: 'Source Sans Pro'; */
+  font-weight: 300;
+  max-height: 32px;
+  line-height: 16px;
   overflow: hidden;
   text-align: justify;
   text-overflow: ellipsis;
@@ -372,6 +375,7 @@ a:hover {
 .menu {
   background: #fff;
   border: 1px solid #ddd;
+  display: inline-block;
   overflow: scroll;
   max-height: 200px;
   z-index: 1;
@@ -386,6 +390,7 @@ a:hover {
 .menu li {
   background-color: #fff;
   border-bottom: 1px solid #eee;
+  /* display: inline-block; */
   padding: 10px 20px;
   text-align: left;
 }

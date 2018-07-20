@@ -7,7 +7,6 @@ module.exports = app => {
   // POST - create new Task
   app.post('/api/tasks', requireLogin, (req, res) => {
     const { title, description, project, assignedTo } = req.body;
-    // create new Task
     const task = new Task({ title, description, project, assignedTo });
 
     task.recipients = [assignedTo];
@@ -65,7 +64,6 @@ module.exports = app => {
         if (err) {
           throw err;
         } else {
-          // task = {task, ...req.body}
           Object.assign(task, req.body);
           task.save();
           return res.send(task);

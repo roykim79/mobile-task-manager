@@ -11,20 +11,16 @@ class Task extends Component {
 
     this.state = {
       assignedTo: {
-        firstName: "John",
-        lastName: "Doe"
+        firstName: "",
+        lastName: ""
       },
-      inputDescriptionVisible: false,
-      inputTitleVisible: false,
       project: {
-        name: "Default",
-        _id: "101"
+        name: "",
+        _id: "001"
       },
-      projectSelectVisible: false,
       status: "Not Started",
       statuses: ['Not started', 'In progress', 'Completed'],
-      statusSelectVisible: false,
-      userSelectVisible: false
+      visibleMenu: ""
     }
   }
 
@@ -40,29 +36,42 @@ class Task extends Component {
     this.props.history.push(`/projects/${project._id}`);
   }
 
-  handleStatusCaret = () => {
-    if (this.state.statusSelectVisible) {
+  handleBodyClick = (e) => {
+    if (!e.target.classList.contains('toggles')) {
+      this.setState({visibleMenu: ""})
+    }
+  }
+
+  handleCaret = (menuName) => {
+    if (this.state.visibleMenu === menuName) {
       return 'expand_less';
     } else {
       return 'expand_more';
     }
   }
 
-  handleUsersCaret = () => {
-    if (this.state.userSelectVisible) {
-      return 'expand_less';
+  handleOptionsLinks = () => {
+    if (this.state.visibleMenu === 'options') {
+      return (
+        <ul className="menu fr">
+          <li className="toggles" onClick={this.deleteTask} >
+            <i className="material-icons">delete</i>
+            Delete Task
+          </li>
+        </ul>
+      )
     } else {
-      return 'expand_more';
+      return <div></div>;
     }
   }
 
   handleStatusLinks = () => {
-    if (this.state.statusSelectVisible) {
+    if (this.state.visibleMenu === 'status') {
       return (
         <ul className="menu">
           {this.state.statuses.map((status, i) => {
             return (
-              <li className={"status " + (status === this.state.status ? "active" : "normal")}
+              <li className={"status toggles " + (status === this.state.status ? "active" : "normal")}
                 onClick={() => { this.updateStatus(status) }}
                 key={i} >
                 {status}
@@ -77,12 +86,12 @@ class Task extends Component {
   }
 
   handleUserLinks = () => {
-    if (this.state.userSelectVisible) {
+    if (this.state.visibleMenu === 'user') {
       return (
         <ul className="menu">
           {this.props.users.map((user, i) => {
             return (
-              <li className={"status " + (user === this.state.assingedTo ? "active" : "normal")}
+              <li className={"status toggles " + (user === this.state.assingedTo ? "active" : "normal")}
                 onClick={() => { this.updateUser(user) }}
                 key={i} >
                 {user.firstName} {user.lastName}
@@ -96,18 +105,17 @@ class Task extends Component {
     }
   }
 
-  toggleStatusList = () => {
-    this.setState({ statusSelectVisible: !this.state.statusSelectVisible });
-  }
-
-  toggleUserList = () => {
-    this.setState({ userSelectVisible: !this.state.userSelectVisible });
+  toggleVisibleList = (menuName) => {
+    if (this.state.visibleMenu === menuName) {
+      this.setState({ visibleMenu: '' });
+    } else {
+      this.setState({ visibleMenu: menuName });
+    }
   }
 
   updateStatus = async (status) => {
     await this.setState({ status: status });
-    this.toggleStatusList();
-    this.updateTask();
+    this.toggleVisibleList('status');
   }
 
   updateTask = () => {
@@ -119,15 +127,16 @@ class Task extends Component {
 
   updateUser = async (user) => {
     await this.setState({ assignedTo: user });
-    this.toggleUserList();
-    this.updateTask();
+    this.toggleVisibleList('user');
   }
 
   render() {
     return (
-      <div className="task">
+      <div className="task"
+        onClick={this.handleBodyClick}>
         <div className="header">
-          <Link to={`/projects/${this.state.project._id}`} >
+          <Link to={`/projects/${this.state.project._id}`}
+            onClick={this.updateTask} >
             <i className="material-icons fl">arrow_back_ios</i>
             <span className="ml-20">
               {this.state.project.name}
@@ -135,15 +144,15 @@ class Task extends Component {
           </Link>
           <span className="project-name">
           </span>
-          <i className="material-icons fr"
-            onClick={this.deleteTask}>delete</i>
+          <i className="material-icons toggles action fr"
+            onClick={() => this.toggleVisibleList('options')}>more_vert</i>
         </div>
+        {this.handleOptionsLinks()}
         <div className="task-body border">
           <div className="task-title">
             <div className="section-label wrapper">Title</div>
             <div className="wrapper-thin">
               <input type="text"
-                onBlur={this.updateTask}
                 onChange={e => this.setState({ title: e.target.value })}
                 value={this.state.title} />
             </div>
@@ -152,25 +161,25 @@ class Task extends Component {
             <div className="section-label wrapper">Details</div>
             <div className="task-assignee-status rel wrapper">
               <div className="user-select fl">
-                <div className="task-assignee action" title="Assign to"
-                  onClick={this.toggleUserList}>
-                  <span>
+                <div className="task-assignee toggles action" title="Assign to"
+                  onClick={() => this.toggleVisibleList('user')}>
+                  <span className="toggles">
                     {this.state.assignedTo.firstName} {this.state.assignedTo.lastName}
                   </span>
-                  <i className="material-icons expand-more">{this.handleUsersCaret()}</i>
+                  <i className="material-icons toggles expand-more">{this.handleCaret('user')}</i>
                 </div>
                 <div className="select">
                   {this.handleUserLinks()}
                 </div>
               </div>
-              <div className="status-select fr">
+              <div className="status-select toggles fr">
                 <div className="task-status action"
-                  onClick={this.toggleStatusList}
+                  onClick={() => this.toggleVisibleList('status')}
                   title="Update status">
-                  <span>
+                  <span className="toggles">
                     {this.state.status}
                   </span>
-                  <i className="material-icons expand-more">{this.handleStatusCaret()}</i>
+                  <i className="material-icons toggles expand-more">{this.handleCaret('status')}</i>
                 </div>
                 <div className="select">
                   {this.handleStatusLinks()}
@@ -182,7 +191,6 @@ class Task extends Component {
             <div className="section-label wrapper">Description</div>
             <div className="task-description wrapper-thin">
               <textarea className="form-control" name="" rows="10"
-                onBlur={this.updateTask}
                 onChange={e => this.setState({ description: e.target.value })}
                 value={this.state.description}>
               </textarea>
