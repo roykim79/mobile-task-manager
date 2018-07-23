@@ -21,10 +21,12 @@ class MainMenu extends Component {
 
     if (!foundProject) {
       const projectName = { name: newProjectName };
-  
-      await this.props.createProject(projectName);
+
+      const res = await this.props.createProject(projectName);
+      const newProjectId = res.payload.data._id;
+      
       this.inputNewProject.value = "";
-      this.props.history.push('/projects');
+      this.props.history.push(`/projects/${newProjectId}`);
     } else {
       alert("Duplicate project names are not allowed");
     }

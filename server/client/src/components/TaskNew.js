@@ -36,7 +36,7 @@ class TaskNew extends Component {
     this.setState({ projectSelectVisible: !this.state.projectSelectVisible });
   }
 
-  // send the new task to the 
+  // send the new task to the
   createTask = async (e) => {
     e.preventDefault();
     const { description, project, title, assignedTo } = this.state;
@@ -68,7 +68,7 @@ class TaskNew extends Component {
         <ProjectLinks
           handleClick={this.changeProject}
           projects={this.props.projects}
-          currentSelection={this.state.project} />
+          currentSelection={this.props.currentProject} />
       );
     } else {
       return <div></div>;
@@ -83,7 +83,7 @@ class TaskNew extends Component {
     return (
       <div className="new-task">
         <div className="header">
-          <Link to={`/projects/${this.state.project._id}`} >
+          <Link to={`/projects/${this.props.currentProject._id}`} >
             <i className="material-icons fl">arrow_back_ios</i>
           </Link>
           <span>
@@ -124,8 +124,8 @@ class TaskNew extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, projects, userInfo }) => {
-  return { auth, projects, userInfo };
+const mapStateToProps = ({ auth, currentProject, projects, userInfo }) => {
+  return { auth, currentProject, projects, userInfo };
 }
 
 const mapDispatchToProps = (dispatch) => {

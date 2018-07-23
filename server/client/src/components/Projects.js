@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchProjects } from '../actions';
+import { fetchProjects, fetchProjectTasks, setCurrentProject } from '../actions';
 
 class Projects extends Component {
   constructor() {
@@ -16,7 +16,9 @@ class Projects extends Component {
     this.props.fetchProjects();
   }
 
-  handleProjectClick = (project) => {
+  handleProjectClick = async (project) => {
+    await this.props.fetchProjectTasks(project._id);
+    await this.props.setCurrentProject(project._id);
     this.props.history.push(`/projects/${project._id}`);
   }
 
@@ -76,7 +78,7 @@ const mapStateToProps = ({ auth, projects, userInfo }) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchProjects }, dispatch);
+  return bindActionCreators({ fetchProjects, fetchProjectTasks, setCurrentProject }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects);

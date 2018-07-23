@@ -17,12 +17,16 @@ class Project extends Component {
   }
 
   componentDidMount = () => {
-    this.props.fetchProjectTasks(this.props.match.params.projectId);
-    this.props.setCurrentProject(this.props.match.params.projectId);
+    const { projectId } = this.props.match.params;
+
+    this.props.fetchProjectTasks(projectId);
+    this.props.setCurrentProject(projectId);
   }
 
   handleDeleteClick = () => {
-    this.props.deleteProject(this.props.match.params.projectId);
+    const { projectId } = this.props.match.params;
+
+    this.props.deleteProject(projectId);
     this.props.history.push('/projects');
   }
 

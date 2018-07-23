@@ -27,11 +27,6 @@ module.exports = app => {
         }
       });
     })
-
-
-
-
-
   });
 
   // GET all Projects 
