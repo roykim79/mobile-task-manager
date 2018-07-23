@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { deleteProject, fetchProject, fetchTask } from '../actions';
+import { deleteProject, fetchProjectTasks, fetchTask, setCurrentProject } from '../actions';
 
 import TaskPreview from './TaskPreview';
 
@@ -12,27 +12,33 @@ class Project extends Component {
     super();
 
     this.state = {
-      currentProject: {
-        name: "Project Name",
-        dateCreated: {
-          type: Date,
-          default: Date.now
-        }
-      }
+      optionsMenuVisible: false
     }
   }
 
-  componentDidMount = async () => {
-    const { projectId } = this.props.match.params;
-    let currentProject = await axios.get(`/api/projects/${projectId}`);
-    await this.props.fetchProject(this.props.match.params.projectId);
-
-    this.setState({ currentProject: currentProject.data });
+  componentDidMount = () => {
+    this.props.fetchProjectTasks(this.props.match.params.projectId);
+    this.props.setCurrentProject(this.props.match.params.projectId);
   }
 
   handleDeleteClick = () => {
     this.props.deleteProject(this.props.match.params.projectId);
     this.props.history.push('/projects');
+  }
+
+  handleOptionsLinks = () => {
+    if (this.state.optionsMenuVisible) {
+      return (
+        <ul className="menu fr">
+          <li className="toggles" onClick={this.handleDeleteClick} >
+            <i className="material-icons">delete</i>
+            Delete Project
+          </li>
+        </ul>
+      )
+    } else {
+      return <div></div>;
+    }
   }
 
   renderTasks = () => {
@@ -44,7 +50,7 @@ class Project extends Component {
           {currentTasks.map((task) => {
             return (
               <Link to={`/projects/${task.project}/tasks/${task._id}`} key={task._id}>
-                <TaskPreview {...task} project={this.state.currentProject} />
+                <TaskPreview {...task}/>
               </Link>
             );
           })}
@@ -65,7 +71,7 @@ class Project extends Component {
   }
 
   render() {
-    const { currentProject } = this.state;
+    const { currentProject } = this.props;
 
     return (
       <div className="project-view rel">
@@ -77,8 +83,11 @@ class Project extends Component {
             {currentProject.name}
           </span>
           <i className="material-icons fr"
-            onClick={this.handleDeleteClick}>delete</i>
+            onClick={() => this.setState({optionsMenuVisible: !this.state.optionsMenuVisible})}>
+            more_vert
+          </i>
         </div>
+        {this.handleOptionsLinks()}
         {this.renderTasks()}
         <Link to={{
           pathname: '/createTask',
@@ -96,7 +105,7 @@ const mapStateToProps = ({ auth, currentProject, currentTasks, userInfo }) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ deleteProject, fetchProject, fetchTask }, dispatch);
+  return bindActionCreators({ deleteProject, fetchProjectTasks, fetchTask, setCurrentProject }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Project);

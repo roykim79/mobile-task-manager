@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_PROJECT, CREATE_TASK, DELETE_PROJECT, DELETE_TASK, FETCH_PROJECT, FETCH_PROJECTS, FETCH_TASK, FETCH_USER, FETCH_USER_INFO, FETCH_USERS, SET_CURRENT_PROJECT, UPDATE_TASK } from './types';
+import { CREATE_PROJECT, CREATE_TASK, DELETE_PROJECT, DELETE_TASK, FETCH_PROJECT_TASKS, FETCH_PROJECTS, FETCH_TASK, FETCH_USER, FETCH_USER_INFO, FETCH_USERS, SET_CURRENT_PROJECT, UPDATE_TASK } from './types';
 
 export const createProject = (name) => {
   const res = axios.post('/api/projects', name);
@@ -28,9 +28,9 @@ export const fetchProjects = () => {
 };
 
 // get all tasks with given projectId
-export const fetchProject = (projectId) => {
+export const fetchProjectTasks = (projectId) => {
   const res = axios.get(`/api/projects/${projectId}/tasks`);
-  return { type: FETCH_PROJECT, payload: res }
+  return { type: FETCH_PROJECT_TASKS, payload: res }
 }
 
 export const fetchTask = (taskId) => {
@@ -53,8 +53,9 @@ export const fetchUsers = () => {
   return { type: FETCH_USERS, payload: res };
 };
 
-export const setCurrentProject = (project) => {
-  return { type: SET_CURRENT_PROJECT, payload: project };
+export const setCurrentProject = (projectId) => {
+const res = axios.get(`/api/projects/${projectId}`)
+  return { type: SET_CURRENT_PROJECT, payload: res };
 };
 
 export const updateTask = (taskId) => {

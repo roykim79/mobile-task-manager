@@ -91,8 +91,7 @@ class TaskNew extends Component {
           </span>
         </div>
         <form className="wrapper"
-          onSubmit={this.createTask}
-          action="">
+          onSubmit={this.createTask}>
           <div className="select select-project-name mb-8">
             <div className="project-name action"
               onClick={this.toggleProjectList}>
