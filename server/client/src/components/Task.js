@@ -36,6 +36,14 @@ class Task extends Component {
     this.props.history.push(`/projects/${project._id}`);
   }
 
+  handleBackClick = async () => {
+    const { title, description, status, _id, assignedTo } = this.state;
+    const updatedTask = { title, description, status, assignedTo };
+
+    await this.props.updateTask(_id, updatedTask);
+    this.props.history.push(`/projects/${this.state.project._id}`);
+  }
+
   handleBodyClick = (e) => {
     if (!e.target.classList.contains('toggles')) {
       this.setState({visibleMenu: ""})
@@ -118,13 +126,6 @@ class Task extends Component {
     this.toggleVisibleList('status');
   }
 
-  updateTask = () => {
-    const { title, description, status, _id, assignedTo } = this.state;
-    const updatedTask = { title, description, status, assignedTo };
-
-    axios.put(`/api/tasks/${_id}`, updatedTask);
-  }
-
   updateUser = async (user) => {
     await this.setState({ assignedTo: user });
     this.toggleVisibleList('user');
@@ -135,13 +136,12 @@ class Task extends Component {
       <div className="task"
         onClick={this.handleBodyClick}>
         <div className="header">
-          <Link to={`/projects/${this.state.project._id}`}
-            onClick={this.updateTask} >
+          <span onClick={this.handleBackClick} >
             <i className="material-icons fl">arrow_back_ios</i>
             <span className="ml-20">
               {this.state.project.name}
             </span>
-          </Link>
+          </span>
           <span className="project-name">
           </span>
           <i className="material-icons toggles action fr"

@@ -17,7 +17,8 @@ module.exports = app => {
     const mailer = new Mailer(task, emailTemplate(task));
 
     try {
-      mailer.send();
+      // uncomment this activate mailer
+      // mailer.send();
       task.save((err, task) => {
         if (err) {
           throw err;

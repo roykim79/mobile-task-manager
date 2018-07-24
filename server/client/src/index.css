@@ -324,8 +324,9 @@ a:hover {
 
 .task-preview .task-title {
   font-family: 'Open Sans';
-  font-size: 1.25em;
-  /* font-weight: bold; */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .task-preview .task-assignee-status {
@@ -334,8 +335,8 @@ a:hover {
 }
 
 .task-preview .task-assignee {
-  color: rgb(244, 112, 55);
-  /* bottom: 4px; */
+  /* color: rgb(244, 112, 55); */
+  font-weight: bold;
   position: relative;
 }
 
@@ -348,26 +349,31 @@ a:hover {
 }
 
 .task-status.red {
-  background-color: red;
+  /* background-color: red; */
+  color: red;
 }
 
 .task-status.yellow {
-  background-color: yellow;
-  color: #666;
+  /* background-color: yellow; */
+  /* color: #666; */
+  color: blue;
 }
 
 .task-status.green {
-  background-color: green;
+  /* background-color: green; */
+  color: green;
 }
 
 .task-preview .task-description {
-  /* font-family: 'Source Sans Pro'; */
-  font-weight: 300;
-  max-height: 32px;
-  line-height: 16px;
+  font-size: .85em;
+  /* font-weight: 300; */
+  /* max-height: 2em; */
+  /* line-height: 1em; */
   overflow: hidden;
-  text-align: justify;
+  white-space: nowrap;
+  /* text-align: justify; */
   text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
 }
 
 /********************* Menu**********************/
@@ -526,36 +532,3 @@ a:hover {
 .new-task input {
   margin-bottom: 2%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

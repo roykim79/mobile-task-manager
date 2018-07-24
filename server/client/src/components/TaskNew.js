@@ -26,7 +26,7 @@ class TaskNew extends Component {
   }
 
   cancelNewTask = () => {
-    this.clearInputs();
+    // this.clearInputs();
     this.props.history.goBack();
   }
 
@@ -37,21 +37,22 @@ class TaskNew extends Component {
   }
 
   // send the new task to the
-  createTask = async (e) => {
+  createTask = (e) => {
     e.preventDefault();
     const { description, project, title, assignedTo } = this.state;
     const newTask = { description, project, title, assignedTo }
 
     // send the task to the server, clear the inputs and send user back to the current project's page
-    await this.props.createTask(newTask);
-    this.clearInputs();
-    this.props.history.push(`/projects/${project._id}`);
+    this.props.createTask(newTask, () => {
+      this.props.history.push(`/projects/${project._id}`);
+    });
+    // this.clearInputs();
   }
 
-  clearInputs = () => {
-    this.inputTitle.value = "";
-    this.inputDescription.value = "";
-  }
+  // clearInputs = () => {
+  //   this.inputTitle.value = "";
+  //   this.inputDescription.value = "";
+  // }
 
   handleCaret = () => {
     if (this.state.projectSelectVisible) {

@@ -1,13 +1,18 @@
 import axios from 'axios';
 import { CREATE_PROJECT, CREATE_TASK, DELETE_PROJECT, DELETE_TASK, FETCH_PROJECT_TASKS, FETCH_PROJECTS, FETCH_TASK, FETCH_USER, FETCH_USER_INFO, FETCH_USERS, SET_CURRENT_PROJECT, UPDATE_TASK } from './types';
 
-export const createProject = (name) => {
+export const createProject = (name, callback) => {
   const res = axios.post('/api/projects', name);
+
+  res.then(() => callback());
+
   return { type: CREATE_PROJECT, payload: res };
 };
 
-export const createTask = (task) => {
+export const createTask = (task, callback) => {
   const res = axios.post('/api/tasks', task);
+
+  res.then(() => callback());
   return { type: CREATE_TASK, payload: res };
 };
 
@@ -58,7 +63,7 @@ const res = axios.get(`/api/projects/${projectId}`)
   return { type: SET_CURRENT_PROJECT, payload: res };
 };
 
-export const updateTask = (taskId) => {
-  const res = axios.put(`/api/tasks/${taskId}`);
+export const updateTask = (taskId, task) => {
+  const res = axios.put(`/api/tasks/${taskId}`, task);
   return { type: UPDATE_TASK, payload: res }
 }
