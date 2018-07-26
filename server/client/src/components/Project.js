@@ -54,7 +54,7 @@ class Project extends Component {
           {currentTasks.map((task) => {
             return (
               <Link to={`/projects/${task.project}/tasks/${task._id}`} key={task._id}>
-                <TaskPreview {...task}/>
+                <TaskPreview {...task} />
               </Link>
             );
           })}
@@ -87,7 +87,7 @@ class Project extends Component {
             {currentProject.name}
           </span>
           <i className="material-icons fr"
-            onClick={() => this.setState({optionsMenuVisible: !this.state.optionsMenuVisible})}>
+            onClick={() => this.setState({ optionsMenuVisible: !this.state.optionsMenuVisible })}>
             more_vert
           </i>
         </div>

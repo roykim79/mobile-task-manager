@@ -9,15 +9,15 @@ const ProjectLinks = (props) => {
             return a.name.toLowerCase() > b.name.toLowerCase();
           })
           .map((project) => {
-          return (
-            <li 
-              onClick={() => {props.handleClick(project)}}
-              key={project._id} 
-              className={"project " + (props.currentSelection._id === project._id ? "active" : "normal")}>
-              <span>{project.name}</span>
-            </li>
-          )
-        })}
+            return (
+              <li
+                onClick={() => { props.handleClick(project) }}
+                key={project._id}
+                className={`project ${props.currentSelection._id === project._id ? "active" : "normal"}`}>
+                <span>{project.name}</span>
+              </li>
+            )
+          })}
       </ul>
     );
   } else {

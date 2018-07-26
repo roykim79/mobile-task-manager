@@ -348,32 +348,23 @@ a:hover {
   padding-left: 5px;
 }
 
-.task-status.red {
-  /* background-color: red; */
+.task-status.Not.started {
   color: red;
 }
 
-.task-status.yellow {
-  /* background-color: yellow; */
-  /* color: #666; */
+.task-status.In.progress {
   color: blue;
 }
 
-.task-status.green {
-  /* background-color: green; */
+.task-status.Completed {
   color: green;
 }
 
 .task-preview .task-description {
   font-size: .85em;
-  /* font-weight: 300; */
-  /* max-height: 2em; */
-  /* line-height: 1em; */
   overflow: hidden;
   white-space: nowrap;
-  /* text-align: justify; */
   text-overflow: ellipsis;
-  /* text-overflow: ellipsis; */
 }
 
 /********************* Menu**********************/

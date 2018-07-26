@@ -14,7 +14,7 @@ class App extends Component {
   componentDidMount = () => {
     this.props.fetchUser();
     this.props.fetchUserInfo();
-    this.props.fetchProjects();
+    this.props.fetchProjects().then(() => console.log(this.props));
   }
   
   render() {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import axios from 'axios';
+// import axios from 'axios';
 import { deleteTask, fetchTask, fetchUsers, updateTask } from '../actions';
 
 class Task extends Component {
@@ -46,7 +46,7 @@ class Task extends Component {
 
   handleBodyClick = (e) => {
     if (!e.target.classList.contains('toggles')) {
-      this.setState({visibleMenu: ""})
+      this.setState({ visibleMenu: '' })
     }
   }
 
@@ -58,7 +58,7 @@ class Task extends Component {
     }
   }
 
-  handleOptionsLinks = () => {
+  renderOptionsLinks = () => {
     if (this.state.visibleMenu === 'options') {
       return (
         <ul className="menu fr">
@@ -79,7 +79,7 @@ class Task extends Component {
         <ul className="menu">
           {this.state.statuses.map((status, i) => {
             return (
-              <li className={"status toggles " + (status === this.state.status ? "active" : "normal")}
+              <li className={`status toggles ${status === this.state.status ? "active" : "normal"}`}
                 onClick={() => { this.updateStatus(status) }}
                 key={i} >
                 {status}
@@ -99,7 +99,7 @@ class Task extends Component {
         <ul className="menu">
           {this.props.users.map((user, i) => {
             return (
-              <li className={"status toggles " + (user === this.state.assingedTo ? "active" : "normal")}
+              <li className={`status toggles ${user === this.state.assingedTo ? "active" : "normal"}`}
                 onClick={() => { this.updateUser(user) }}
                 key={i} >
                 {user.firstName} {user.lastName}
@@ -121,13 +121,13 @@ class Task extends Component {
     }
   }
 
-  updateStatus = async (status) => {
-    await this.setState({ status: status });
+  updateStatus = (status) => {
+    this.setState({ status: status });
     this.toggleVisibleList('status');
   }
 
-  updateUser = async (user) => {
-    await this.setState({ assignedTo: user });
+  updateUser = (user) => {
+    this.setState({ assignedTo: user });
     this.toggleVisibleList('user');
   }
 
@@ -145,9 +145,11 @@ class Task extends Component {
           <span className="project-name">
           </span>
           <i className="material-icons toggles action fr"
-            onClick={() => this.toggleVisibleList('options')}>more_vert</i>
+            onClick={() => this.toggleVisibleList('options')}>
+            more_vert
+          </i>
         </div>
-        {this.handleOptionsLinks()}
+        {this.renderOptionsLinks()}
         <div className="task-body border">
           <div className="task-title">
             <div className="section-label wrapper">Title</div>

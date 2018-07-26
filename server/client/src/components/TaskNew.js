@@ -18,16 +18,9 @@ class TaskNew extends Component {
   }
 
   componentDidMount = () => {
-    const { location, userInfo, fetchProjects } = this.props;
+    const { location, userInfo } = this.props;
 
-    fetchProjects();
-    this.setState({ assignedTo: userInfo, project: location.state.project }, () => {
-    });
-  }
-
-  cancelNewTask = () => {
-    // this.clearInputs();
-    this.props.history.goBack();
+    this.setState({ assignedTo: userInfo, project: location.state.project });
   }
 
   // change the value of state.project to be submitted with the form
@@ -46,13 +39,13 @@ class TaskNew extends Component {
     this.props.createTask(newTask, () => {
       this.props.history.push(`/projects/${project._id}`);
     });
-    // this.clearInputs();
   }
 
-  // clearInputs = () => {
-  //   this.inputTitle.value = "";
-  //   this.inputDescription.value = "";
-  // }
+  handleBodyClick = () => {
+    if (this.state.projectSelectVisible) {
+      this.setState({ projectSelectVisible: false });
+    }
+  }
 
   handleCaret = () => {
     if (this.state.projectSelectVisible) {
@@ -63,7 +56,7 @@ class TaskNew extends Component {
   }
 
   // handles the hiding and showing of the project links
-  handleProjectLinks = () => {
+  renderProjectLinks = () => {
     if (this.state.projectSelectVisible) {
       return (
         <ProjectLinks
@@ -82,11 +75,13 @@ class TaskNew extends Component {
 
   render() {
     return (
-      <div className="new-task">
+      <div className="new-task"
+        onClick={this.handleBodyClick}>
         <div className="header">
-          <Link to={`/projects/${this.props.currentProject._id}`} >
-            <i className="material-icons fl">arrow_back_ios</i>
-          </Link>
+          <i className="material-icons fl"
+            onClick={this.props.history.goBack}>
+            arrow_back_ios
+          </i>
           <span>
             New Task
           </span>
@@ -99,19 +94,17 @@ class TaskNew extends Component {
               {this.state.project.name}
               <i className="material-icons expand-more">{this.handleCaret()}</i>
             </div>
-            {this.handleProjectLinks()}
+            {this.renderProjectLinks()}
           </div>
           <input required type="text"
             onChange={e => this.setState({ title: e.target.value })}
-            ref={el => this.inputTitle = el}
             placeholder="Enter a title" />
           <textarea required type="text" rows="3"
-            onChange={e => { this.setState({ description: e.target.value }) }}
-            ref={el => this.inputDescription = el}
+            onChange={e => this.setState({ description: e.target.value })}
             placeholder="Enter a description" >
           </textarea>
           <button className="cancel"
-            onClick={this.cancelNewTask}>
+            onClick={this.props.history.goBack}>
             Cancel
           </button>
           <span className="create-task">
@@ -130,7 +123,7 @@ const mapStateToProps = ({ auth, currentProject, projects, userInfo }) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ createTask, fetchProjects }, dispatch);
+  return bindActionCreators({ createTask }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskNew);

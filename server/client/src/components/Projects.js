@@ -13,14 +13,14 @@ class Projects extends Component {
     }
   }
   componentDidMount = () => {
-    this.props.fetchProjects();
+    // this.props.fetchProjects();
   }
 
-  handleProjectClick = async (project) => {
-    await this.props.fetchProjectTasks(project._id);
-    await this.props.setCurrentProject(project._id);
-    this.props.history.push(`/projects/${project._id}`);
-  }
+  // handleProjectClick = async (project) => {
+  //   await this.props.fetchProjectTasks(project._id);
+  //   await this.props.setCurrentProject(project._id);
+  //   this.props.history.push(`/projects/${project._id}`);
+  // }
 
   render() {
     if (Array.isArray(this.props.projects)) {
@@ -36,7 +36,7 @@ class Projects extends Component {
               <i className="material-icons fr">add_circle_outline</i>
             </Link>
 
-            <ul className={"rel menu " + (this.state.menuVisible ? 'visible' : '')} id="main-menu">
+            <ul className={`rel menu ${this.state.menuVisible ? 'visible' : ''}`} id="main-menu">
               <li className="user-info sm muted">
                 <span>
                   Logged in as {this.props.userInfo.firstName}<br />
@@ -53,10 +53,9 @@ class Projects extends Component {
           <div className="rel">
             {this.props.projects.map((project) => {
               return (
-                <div
-                  onClick={() => this.handleProjectClick(project)}
-                  key={project._id}
-                  className="project-preview rel">
+                <div className="project-preview rel"
+                  onClick={() => this.props.history.push(`/projects/${project._id}`)}
+                  key={project._id}>
                   <span className="name">
                     <i className="material-icons muted mr-8">arrow_forward_ios</i>
                     {project.name}
