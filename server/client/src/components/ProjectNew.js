@@ -13,11 +13,14 @@ class MainMenu extends Component {
   createProject = (e) => {
     e.preventDefault();
     const { newProjectName } = this.state;
-    // check if project name already exists
+    
+    // find project with name equal to the new project name
     const foundProject = this.props.projects.find((project) => {
       return project.name === newProjectName;
     });
 
+    // if no project exists, create a new project and redirect user back to projects view
+    // other wise, alert the user that duplicate project names are not allowed
     if (!foundProject) {
       const newProject = { name: newProjectName };
 
@@ -41,7 +44,7 @@ class MainMenu extends Component {
           <form onSubmit={this.createProject}
             className="wrapper">
             <input required type="text"
-              onChange={(e) => this.setState({ newProjectName: e.target.value })}
+              onChange={e => this.setState({ newProjectName: e.target.value })}
               placeholder="Project name" />
             <button onClick={this.props.history.goBack}
               className="cancel">

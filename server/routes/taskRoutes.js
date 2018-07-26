@@ -2,6 +2,7 @@ const Task = require("../models/Task");
 const requireLogin = require('../middlewares/requireLogin');
 const Mailer = require('../services/Mailer');
 const emailTemplate = require('../services/emailTemplate');
+const ObjectId = require('mongodb').ObjectID;
 
 module.exports = app => {
   // POST - create new Task
@@ -9,26 +10,13 @@ module.exports = app => {
     const { title, description, project, assignedTo } = req.body;
     const task = new Task({ title, description, project, assignedTo });
 
-    task.recipients = [assignedTo];
-    task._user = req.user._id;
-    task.dateSent = Date.now();
-    task.subject = "Hello";
-
-    const mailer = new Mailer(task, emailTemplate(task));
-
-    try {
-      // uncomment this activate mailer
-      // mailer.send();
-      task.save((err, task) => {
-        if (err) {
-          throw err;
-        } else {
-          return res.send(task);
-        }
-      })
-    } catch (err) {
-      res.status(422).send(err);
-    }
+    task.save((err, task) => {
+      if (err) {
+        throw err;
+      } else {
+        return res.send(task);
+      }
+    })
   })
 
   // GET Task by id
@@ -47,9 +35,7 @@ module.exports = app => {
 
   //DELETE a Task found by its id
   app.delete('/api/tasks/:taskId', requireLogin, (req, res) => {
-    Task.deleteOne({
-      _id: req.params.taskId
-    }, (err, task) => {
+    Task.deleteOne({_id: req.params.taskId}, (err, task) => {
       if (err) {
         throw err;
       } else {
@@ -65,9 +51,26 @@ module.exports = app => {
         if (err) {
           throw err;
         } else {
-          Object.assign(task, req.body);
-          task.save();
-          return res.send(task);
+          // check if the user was updated, if so send an email out
+          if (task.assignedTo._id.toString() !== req.body.assignedTo._id) {
+            Object.assign(task, req.body);
+            task.recipients = [req.body.assignedTo];
+            task.subject = "Hello";
+
+            const mailer = new Mailer(task, emailTemplate(task));
+
+            mailer.send();
+          } else {
+            Object.assign(task, req.body);
+          }
+
+          task.save((err, task) => {
+            if (err) {
+              throw err;
+            } else {
+              return res.send(task);
+            }
+          });
         }
       });
   });

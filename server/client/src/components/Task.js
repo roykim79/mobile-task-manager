@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import axios from 'axios';
 import { deleteTask, fetchTask, fetchUsers, updateTask } from '../actions';
 
 class Task extends Component {
@@ -11,16 +9,15 @@ class Task extends Component {
 
     this.state = {
       assignedTo: {
-        firstName: "",
-        lastName: ""
+        firstName: '',
+        lastName: ''
       },
       project: {
-        name: "",
-        _id: "001"
+        name: '',
+        _id: '001'
       },
-      status: "Not Started",
-      statuses: ['Not started', 'In progress', 'Completed'],
-      visibleMenu: ""
+      status: 'Not Started',
+      visibleMenu: null
     }
   }
 
@@ -32,24 +29,29 @@ class Task extends Component {
 
   deleteTask = () => {
     const { project, _id } = this.state;
-    this.props.deleteTask(_id);
-    this.props.history.push(`/projects/${project._id}`);
+
+    this.props.deleteTask(_id, () => {
+      this.props.history.push(`/projects/${project._id}`);
+    });
   }
 
   handleBackClick = async () => {
     const { title, description, status, _id, assignedTo } = this.state;
     const updatedTask = { title, description, status, assignedTo };
 
+    // update the task and send the user back to the project view
     await this.props.updateTask(_id, updatedTask);
     this.props.history.push(`/projects/${this.state.project._id}`);
   }
 
+  // close the open menu if the user clicks on anything that is not part of the menu
   handleBodyClick = (e) => {
-    if (!e.target.classList.contains('toggles')) {
-      this.setState({ visibleMenu: '' })
+    if (this.state.visibleMenu !== null && !e.target.classList.contains('toggles')) {
+      this.setState({ visibleMenu: null })
     }
   }
 
+  // return the correct icon for the menu depending on which menu is visible
   handleCaret = (menuName) => {
     if (this.state.visibleMenu === menuName) {
       return 'expand_less';
@@ -58,7 +60,7 @@ class Task extends Component {
     }
   }
 
-  renderOptionsLinks = () => {
+  handleOptionsMenu = () => {
     if (this.state.visibleMenu === 'options') {
       return (
         <ul className="menu fr">
@@ -73,15 +75,16 @@ class Task extends Component {
     }
   }
 
-  handleStatusLinks = () => {
+  handleStatusMenu = () => {
+    const statuses = ['Not started', 'In progress', 'Completed'];
+    
     if (this.state.visibleMenu === 'status') {
       return (
         <ul className="menu">
-          {this.state.statuses.map((status, i) => {
+          {statuses.map((status, i) => {
             return (
-              <li className={`status toggles ${status === this.state.status ? "active" : "normal"}`}
-                onClick={() => { this.updateStatus(status) }}
-                key={i} >
+              <li className={`status toggles ${status === this.state.status ? "active" : null}`} key={i} 
+                onClick={() => { this.updateStatus(status) }} >
                 {status}
               </li>
             );
@@ -93,29 +96,30 @@ class Task extends Component {
     }
   }
 
-  handleUserLinks = () => {
+  handleUsersMenu = () => {
     if (this.state.visibleMenu === 'user') {
       return (
-        <ul className="menu">
-          {this.props.users.map((user, i) => {
-            return (
-              <li className={`status toggles ${user === this.state.assingedTo ? "active" : "normal"}`}
-                onClick={() => { this.updateUser(user) }}
-                key={i} >
-                {user.firstName} {user.lastName}
-              </li>
-            );
-          })}
-        </ul>
+        <div className="select">
+          <ul className="menu">
+            {this.props.users.map((user, i) => {
+              return (
+                <li className={`status toggles ${user === this.state.assingedTo ? "active" : null}`} key={i}
+                  onClick={() => { this.updateUser(user) }} >
+                  {user.firstName} {user.lastName}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       )
     } else {
       return <div></div>;
     }
   }
 
-  toggleVisibleList = (menuName) => {
+  toggleMenu = (menuName) => {
     if (this.state.visibleMenu === menuName) {
-      this.setState({ visibleMenu: '' });
+      this.setState({ visibleMenu: null });
     } else {
       this.setState({ visibleMenu: menuName });
     }
@@ -123,12 +127,12 @@ class Task extends Component {
 
   updateStatus = (status) => {
     this.setState({ status: status });
-    this.toggleVisibleList('status');
+    this.toggleMenu('status');
   }
 
   updateUser = (user) => {
     this.setState({ assignedTo: user });
-    this.toggleVisibleList('user');
+    this.toggleMenu('user');
   }
 
   render() {
@@ -145,11 +149,11 @@ class Task extends Component {
           <span className="project-name">
           </span>
           <i className="material-icons toggles action fr"
-            onClick={() => this.toggleVisibleList('options')}>
+            onClick={() => this.toggleMenu('options')}>
             more_vert
           </i>
         </div>
-        {this.renderOptionsLinks()}
+        {this.handleOptionsMenu()}
         <div className="task-body border">
           <div className="task-title">
             <div className="section-label wrapper">Title</div>
@@ -164,19 +168,17 @@ class Task extends Component {
             <div className="task-assignee-status rel wrapper">
               <div className="user-select fl">
                 <div className="task-assignee toggles action" title="Assign to"
-                  onClick={() => this.toggleVisibleList('user')}>
+                  onClick={() => this.toggleMenu('user')}>
                   <span className="toggles">
                     {this.state.assignedTo.firstName} {this.state.assignedTo.lastName}
                   </span>
                   <i className="material-icons toggles expand-more">{this.handleCaret('user')}</i>
                 </div>
-                <div className="select">
-                  {this.handleUserLinks()}
-                </div>
+                {this.handleUsersMenu()}
               </div>
               <div className="status-select toggles fr">
                 <div className="task-status action"
-                  onClick={() => this.toggleVisibleList('status')}
+                  onClick={() => this.toggleMenu('status')}
                   title="Update status">
                   <span className="toggles">
                     {this.state.status}
@@ -184,7 +186,7 @@ class Task extends Component {
                   <i className="material-icons toggles expand-more">{this.handleCaret('status')}</i>
                 </div>
                 <div className="select">
-                  {this.handleStatusLinks()}
+                  {this.handleStatusMenu()}
                 </div>
               </div>
             </div>

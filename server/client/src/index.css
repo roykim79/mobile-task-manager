@@ -295,7 +295,6 @@ a:hover {
   margin-bottom: 8px;
 }
 
-
 /************************** Project ***************************/
 .project-tasks a {
   color: #555;
@@ -335,7 +334,6 @@ a:hover {
 }
 
 .task-preview .task-assignee {
-  /* color: rgb(244, 112, 55); */
   font-weight: bold;
   position: relative;
 }
@@ -387,7 +385,6 @@ a:hover {
 .menu li {
   background-color: #fff;
   border-bottom: 1px solid #eee;
-  /* display: inline-block; */
   padding: 10px 20px;
   text-align: left;
 }
@@ -405,11 +402,7 @@ a:hover {
 
 
 #main-menu {
-  display: none;
   margin-top: 12px;
-}
-
-#main-menu.visible {
   display: block;
 }
 

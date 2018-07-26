@@ -1,80 +1,84 @@
 import axios from 'axios';
 import { CREATE_PROJECT, CREATE_TASK, DELETE_PROJECT, DELETE_TASK, FETCH_PROJECT_TASKS, FETCH_PROJECTS, FETCH_TASK, FETCH_USER, FETCH_USER_INFO, FETCH_USERS, SET_CURRENT_PROJECT, UPDATE_TASK } from './types';
 
-export const createProject = (name, callback) => {
-  const res = axios.post('/api/projects', name);
+export const createProject = (projectName, callback) => {
+  const req = axios.post('/api/projects', projectName);
   
-  res.then(() => callback());
+  req.then(() => callback());
 
-  return { type: CREATE_PROJECT, payload: res };
+  return { type: CREATE_PROJECT, payload: req };
 };
 
 export const createTask = (task, callback) => {
-  const res = axios.post('/api/tasks', task);
+  const req = axios.post('/api/tasks', task);
   
-  res.then(() => callback());
+  req.then(() => callback());
   
-  return { type: CREATE_TASK, payload: res };
+  return { type: CREATE_TASK, payload: req };
 };
 
-export const deleteTask = (taskId) => {
-  const res = axios.delete(`/api/tasks/${taskId}`);
+export const deleteTask = (taskId, callback) => {
+  const req = axios.delete(`/api/tasks/${taskId}`);
 
-  return { type: DELETE_TASK, payload: res };
+  req.then(() => callback());
+
+  return { type: DELETE_TASK, payload: req };
 };
 
-export const deleteProject = (projectId) => {
-  const res = axios.delete(`/api/projects/${projectId}`);
+export const deleteProject = (projectId, callback) => {
+  const req = axios.delete(`/api/projects/${projectId}`);
 
-  return { type: DELETE_PROJECT, payload: res };
+  req.then(() => callback());
+
+  return { type: DELETE_PROJECT, payload: req };
 };
 
 // get all Project names
 export const fetchProjects = () => {
-  const res = axios.get('/api/projects');
+  const req = axios.get('/api/projects');
 
-  return { type: FETCH_PROJECTS, payload: res };
+  return { type: FETCH_PROJECTS, payload: req };
 };
 
 // get all tasks with given projectId
 export const fetchProjectTasks = (projectId) => {
-  const res = axios.get(`/api/projects/${projectId}/tasks`);
+  const req = axios.get(`/api/projects/${projectId}/tasks`);
 
-  return { type: FETCH_PROJECT_TASKS, payload: res }
+  return { type: FETCH_PROJECT_TASKS, payload: req }
 }
 
 export const fetchTask = (taskId) => {
-  const res = axios.get(`/api/tasks/${taskId}`);
+  const req = axios.get(`/api/tasks/${taskId}`);
 
-  return { type: FETCH_TASK, payload: res };
+  return { type: FETCH_TASK, payload: req };
 };
 
 export const fetchUser = () => {
-  const res = axios.get('/api/current_user');
+  const req = axios.get('/api/current_user');
 
-  return { type: FETCH_USER, payload: res };
+  return { type: FETCH_USER, payload: req };
 };
 
 export const fetchUserInfo = () => {
-  const res = axios.get('/api/userInfo');
+  const req = axios.get('/api/userInfo');
 
-  return { type: FETCH_USER_INFO, payload: res };
+  return { type: FETCH_USER_INFO, payload: req };
 };
 
 export const fetchUsers = () => {
-  const res = axios.get('/api/users');
+  const req = axios.get('/api/users');
 
-  return { type: FETCH_USERS, payload: res };
+  return { type: FETCH_USERS, payload: req };
 };
 
 export const setCurrentProject = (projectId) => {
-  const res = axios.get(`/api/projects/${projectId}`);
+  const req = axios.get(`/api/projects/${projectId}`);
 
-  return { type: SET_CURRENT_PROJECT, payload: res };
+  return { type: SET_CURRENT_PROJECT, payload: req };
 };
 
 export const updateTask = (taskId, task) => {
-  const res = axios.put(`/api/tasks/${taskId}`, task);
+  const req = axios.put(`/api/tasks/${taskId}`, task);
 
-  return { type: UPDATE_TASK, payload: res }
+  return { type: UPDATE_TASK, payload: req }
 }

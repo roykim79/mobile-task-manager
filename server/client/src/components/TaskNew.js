@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createTask, fetchProjects } from '../actions';
-import ProjectLinks from './ProjectLinks';
+import { createTask } from '../actions';
 
 class TaskNew extends Component {
   constructor() {
     super()
 
     this.state = {
-      projectSelectVisible: false,
       project: {
         name: "Select Project"
       }
@@ -23,60 +20,20 @@ class TaskNew extends Component {
     this.setState({ assignedTo: userInfo, project: location.state.project });
   }
 
-  // change the value of state.project to be submitted with the form
-  changeProject = (project) => {
-    this.setState({ project: project });
-    this.setState({ projectSelectVisible: !this.state.projectSelectVisible });
-  }
-
-  // send the new task to the
+  // create a new task and redirect user back to project view
   createTask = (e) => {
     e.preventDefault();
     const { description, project, title, assignedTo } = this.state;
     const newTask = { description, project, title, assignedTo }
 
-    // send the task to the server, clear the inputs and send user back to the current project's page
     this.props.createTask(newTask, () => {
       this.props.history.push(`/projects/${project._id}`);
     });
   }
 
-  handleBodyClick = () => {
-    if (this.state.projectSelectVisible) {
-      this.setState({ projectSelectVisible: false });
-    }
-  }
-
-  handleCaret = () => {
-    if (this.state.projectSelectVisible) {
-      return "expand_less";
-    } else {
-      return 'expand_more';
-    }
-  }
-
-  // handles the hiding and showing of the project links
-  renderProjectLinks = () => {
-    if (this.state.projectSelectVisible) {
-      return (
-        <ProjectLinks
-          handleClick={this.changeProject}
-          projects={this.props.projects}
-          currentSelection={this.props.currentProject} />
-      );
-    } else {
-      return <div></div>;
-    }
-  }
-
-  toggleProjectList = () => {
-    this.setState({ projectSelectVisible: !this.state.projectSelectVisible });
-  }
-
   render() {
     return (
-      <div className="new-task"
-        onClick={this.handleBodyClick}>
+      <div className="new-task">
         <div className="header">
           <i className="material-icons fl"
             onClick={this.props.history.goBack}>
@@ -89,12 +46,9 @@ class TaskNew extends Component {
         <form className="wrapper"
           onSubmit={this.createTask}>
           <div className="select select-project-name mb-8">
-            <div className="project-name action"
-              onClick={this.toggleProjectList}>
+            <div className="project-name">
               {this.state.project.name}
-              <i className="material-icons expand-more">{this.handleCaret()}</i>
             </div>
-            {this.renderProjectLinks()}
           </div>
           <input required type="text"
             onChange={e => this.setState({ title: e.target.value })}
@@ -118,8 +72,8 @@ class TaskNew extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, currentProject, projects, userInfo }) => {
-  return { auth, currentProject, projects, userInfo };
+const mapStateToProps = ({ auth, currentProject, userInfo }) => {
+  return { auth, currentProject, userInfo };
 }
 
 const mapDispatchToProps = (dispatch) => {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { deleteProject, fetchProjectTasks, fetchTask, setCurrentProject } from '../actions';
 
 import TaskPreview from './TaskPreview';
@@ -26,8 +25,9 @@ class Project extends Component {
   handleDeleteClick = () => {
     const { projectId } = this.props.match.params;
 
-    this.props.deleteProject(projectId);
-    this.props.history.push('/projects');
+    this.props.deleteProject(projectId, () => {
+      this.props.history.push('/projects');
+    });
   }
 
   handleOptionsLinks = () => {
@@ -66,9 +66,7 @@ class Project extends Component {
           <div>
             <i className="material-icons">folder_open</i>
           </div>
-          <div>
-            <span>No tasks found</span>
-          </div>
+          <div>No tasks found</div>
         </div>
       );
     }

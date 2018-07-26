@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchProjects, fetchProjectTasks, setCurrentProject } from '../actions';
+import { fetchProjects } from '../actions';
 
 class Projects extends Component {
   constructor() {
@@ -12,15 +12,49 @@ class Projects extends Component {
       menuVisible: false
     }
   }
+
   componentDidMount = () => {
-    // this.props.fetchProjects();
+    this.props.fetchProjects();
   }
 
-  // handleProjectClick = async (project) => {
-  //   await this.props.fetchProjectTasks(project._id);
-  //   await this.props.setCurrentProject(project._id);
-  //   this.props.history.push(`/projects/${project._id}`);
-  // }
+  handleMenu = () => {
+    if (this.state.menuVisible) {
+      return (
+        <ul className="rel menu" id="main-menu">
+          <li className="user-info sm muted">
+            <span>
+              Logged in as {this.props.userInfo.firstName}<br />
+              {this.props.userInfo.email}
+            </span>
+            <img src={this.props.userInfo.photo} />
+          </li>
+          <li className="logout">
+            <Link to='/api/logout'>Logout</Link>
+          </li>
+        </ul>
+      );
+    } else {
+      return <div></div>;
+    }
+  }
+
+  renderProjects = () => {
+    return (
+      <div className="rel">
+        {this.props.projects.map((project) => {
+          return (
+            <div className="project-preview rel" key={project._id}
+              onClick={() => this.props.history.push(`/projects/${project._id}`)}>
+              <span className="name">
+                <i className="material-icons muted mr-8">arrow_forward_ios</i>
+                {project.name}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   render() {
     if (Array.isArray(this.props.projects)) {
@@ -28,42 +62,16 @@ class Projects extends Component {
         <div className="projects-list">
           <div className="header rel">
             <i className="material-icons fl"
-              onClick={e => this.setState({ menuVisible: !this.state.menuVisible })}>
+              onClick={() => this.setState({ menuVisible: !this.state.menuVisible })}>
               menu
             </i>
             Projects
             <Link to='/createProject'>
               <i className="material-icons fr">add_circle_outline</i>
             </Link>
-
-            <ul className={`rel menu ${this.state.menuVisible ? 'visible' : ''}`} id="main-menu">
-              <li className="user-info sm muted">
-                <span>
-                  Logged in as {this.props.userInfo.firstName}<br />
-                  {this.props.userInfo.email}
-                </span>
-                <img src={this.props.userInfo.photo} alt="" />
-              </li>
-              <li className="logout">
-                <Link to='/api/logout'>Logout</Link>
-              </li>
-            </ul>
+            {this.handleMenu()}
           </div>
-
-          <div className="rel">
-            {this.props.projects.map((project) => {
-              return (
-                <div className="project-preview rel"
-                  onClick={() => this.props.history.push(`/projects/${project._id}`)}
-                  key={project._id}>
-                  <span className="name">
-                    <i className="material-icons muted mr-8">arrow_forward_ios</i>
-                    {project.name}
-                  </span>
-                </div>
-              )
-            })}
-          </div>
+          {this.renderProjects()}
         </div>
       );
     } else {
@@ -77,7 +85,7 @@ const mapStateToProps = ({ auth, projects, userInfo }) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchProjects, fetchProjectTasks, setCurrentProject }, dispatch);
+  return bindActionCreators({ fetchProjects }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects);
