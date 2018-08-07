@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchUserInfo } from '../actions';
+import { createOrganization, fetchUserInfo } from '../actions';
 
 class OrganizationNew extends Component {
   constructor() {
@@ -16,8 +16,19 @@ class OrganizationNew extends Component {
     this.setState({createdBy: this.props.userInfo})
   }
 
-  createOrganization = () => {
-    //////////////////////////////////////////
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    const { newOrgName } = this.state;
+    const { createOrganization, userInfo } = this.props;
+
+    const newOrg = {
+      name: newOrgName,
+      createdBy: userInfo
+    };
+
+    createOrganization(newOrg, () => {
+      this.props.history.push(`/projects/`);
+    })
   }
 
   render() {
@@ -26,7 +37,7 @@ class OrganizationNew extends Component {
         <div className="header wrapper">
           NewOrg
         </div>
-        <form className="wrapper" onSubmit={this.createOrganization}>
+        <form className="wrapper" onSubmit={this.handleFormSubmit}>
           <input required type="text" 
             onChange={(e) => this.setState({newOrgName: e.target.value})}
             placeholder="Organization Name"/>
@@ -42,7 +53,7 @@ const mapStateToProps = ({ userInfo }) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchUserInfo }, dispatch);
+  return bindActionCreators({ createOrganization, fetchUserInfo }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganizationNew);
