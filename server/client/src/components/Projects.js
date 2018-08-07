@@ -14,7 +14,11 @@ class Projects extends Component {
   }
 
   componentDidMount = () => {
-    this.props.fetchProjects();
+    if (this.props.userInfo.organization === undefined) {
+      this.props.history.push('/createOrganization');
+    } else {
+      this.props.fetchProjects();
+    }
   }
 
   handleMenu = () => {

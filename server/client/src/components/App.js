@@ -8,12 +8,15 @@ import ProjectNew from './ProjectNew';
 import TaskNew from './TaskNew';
 import Task from './Task';
 import Project from './Project';
+import OrganizationNew from './OrganizationNew';
 import Projects from './Projects';
 
 class App extends Component {
-  componentDidMount = () => {
-    this.props.fetchUser();
-    this.props.fetchUserInfo();
+  componentDidMount = async () => {
+    await this.props.fetchUser();
+    await this.props.fetchUserInfo();
+
+
   }
   
   render() {
@@ -22,6 +25,7 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Route exact path="/" component={Landing} />
+            <Route exact path="/createOrganization" component={OrganizationNew} />
             <Route exact path="/createProject" component={ProjectNew} />
             <Route exact path="/projects" component={Projects} />
             <Route path="/createTask" component={TaskNew} />
@@ -34,8 +38,8 @@ class App extends Component {
   }
 };
 
-const mapStateToProps = ({ auth, currentProject }) => {
-  return { auth, currentProject };
+const mapStateToProps = ({ auth, currentProject, userInfo }) => {
+  return { auth, currentProject, userInfo };
 }
 
 export default connect(mapStateToProps, actions)(App);

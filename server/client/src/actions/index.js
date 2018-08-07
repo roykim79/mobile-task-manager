@@ -1,5 +1,13 @@
 import axios from 'axios';
-import { CREATE_PROJECT, CREATE_TASK, DELETE_PROJECT, DELETE_TASK, FETCH_PROJECT_TASKS, FETCH_PROJECTS, FETCH_TASK, FETCH_USER, FETCH_USER_INFO, FETCH_USERS, SET_CURRENT_PROJECT, UPDATE_TASK } from './types';
+import { CREATE_ORGANIZATION, CREATE_PROJECT, CREATE_TASK, DELETE_PROJECT, DELETE_TASK, FETCH_PROJECT_TASKS, FETCH_PROJECTS, FETCH_TASK, FETCH_USER, FETCH_USER_INFO, FETCH_USERS, SET_CURRENT_PROJECT, UPDATE_TASK } from './types';
+
+export const createOrganization = (organization, callback) => {
+  const req = axios.post('/api/organizations', organization);
+  ////////////////////////////////////////////////////////
+  req.then(() => callback());
+
+  return { type: CREATE_ORGANIZATION, payload: req };
+};
 
 export const createProject = (projectName, callback) => {
   const req = axios.post('/api/projects', projectName);

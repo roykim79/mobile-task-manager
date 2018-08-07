@@ -10,6 +10,8 @@ module.exports = app => {
   app.get('/auth/google/callback',
     passport.authenticate('google'),
     (req, res) => {
+      // this is where you need to check for organization
+      // and redirect somewhere else if they do not have an organization
       res.redirect('/projects');
     }
   );

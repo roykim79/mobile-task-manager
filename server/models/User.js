@@ -6,6 +6,10 @@ const UserSchema = new Schema({
   firstName: String,
   googleId: String,
   lastName: String,
+  organization: {
+    type: Schema.Types.ObjectId,
+    ref: 'Organization'
+  },
   photo: String
 })
 

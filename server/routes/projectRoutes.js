@@ -6,7 +6,7 @@ const ObjectId = require('mongodb').ObjectID;
 module.exports = app => {
   // POST - create new Project
   app.post('/api/projects', requireLogin, (req, res) => {
-    const { name } = req.body;
+    const { createdBy, name } = req.body;
     // check if project name exists in order to prevent duplicates
     Project.findOne({ name }, (err, project) => {
       if (err) {
@@ -15,7 +15,11 @@ module.exports = app => {
         return res.status(400).send("Project name already exists, duplicate project names are not allowed");
       }
 
-      const newProject = new Project({ name });
+      const newProject = new Project({ 
+        createdBy, 
+        name, 
+        organization: req.user.organization 
+      });
 
       newProject.save((err) => {
         if (err) {

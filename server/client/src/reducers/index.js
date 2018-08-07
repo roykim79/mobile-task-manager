@@ -7,7 +7,6 @@ import taskReducer from './taskReducer';
 import userInfoReducer from './userInfoReducer';
 import usersReducer from './usersReducer';
 
-
 export default combineReducers({
   auth: authReducer,
   currentProject: currenProjectReducer,

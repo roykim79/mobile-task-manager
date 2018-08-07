@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { createProject, fetchProjects } from '../actions';
 
-class MainMenu extends Component {
+class ProjectNew extends Component {
   constructor() {
     super();
 
@@ -13,7 +13,7 @@ class MainMenu extends Component {
   createProject = (e) => {
     e.preventDefault();
     const { newProjectName } = this.state;
-    
+
     // find project with name equal to the new project name
     const foundProject = this.props.projects.find((project) => {
       return project.name === newProjectName;
@@ -22,7 +22,11 @@ class MainMenu extends Component {
     // if no project exists, create a new project and redirect user back to projects view
     // other wise, alert the user that duplicate project names are not allowed
     if (!foundProject) {
-      const newProject = { name: newProjectName };
+      const newProject = { 
+        createdBy: this.props.userInfo,
+        name: newProjectName,
+        organization: this.props.userInfo.organization
+      };
 
       this.props.createProject(newProject, () => {
         this.props.history.push(`/projects/`);
@@ -60,12 +64,12 @@ class MainMenu extends Component {
   }
 }
 
-const mapStateToProps = ({ projects }) => {
-  return { projects };
+const mapStateToProps = ({ projects, userInfo }) => {
+  return { projects, userInfo };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ createProject, fetchProjects }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectNew);

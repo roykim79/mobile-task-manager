@@ -10,6 +10,7 @@ class Landing extends Component {
 
     // if the user is logged in, redirect to /tasks
     if (this.props.auth) {
+      
       this.props.history.push('/projects');
     }
   }

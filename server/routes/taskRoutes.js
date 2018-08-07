@@ -2,7 +2,6 @@ const Task = require("../models/Task");
 const requireLogin = require('../middlewares/requireLogin');
 const Mailer = require('../services/Mailer');
 const emailTemplate = require('../services/emailTemplate');
-const ObjectId = require('mongodb').ObjectID;
 
 module.exports = app => {
   // POST - create new Task
@@ -46,32 +45,34 @@ module.exports = app => {
 
   // PUT - Update task found by task id
   app.put('/api/tasks/:taskId', requireLogin, (req, res) => {
-    Task.findById(req.params.taskId)
-      .exec((err, task) => {
-        if (err) {
-          throw err;
+    Task.findById(req.params.taskId).exec((err, task) => {
+      if (err) {
+        throw err;
+      } else {
+        // check if the user was updated, if so send an email out
+        if (task.assignedTo._id.toString() !== req.body.assignedTo._id) {
+          Object.assign(task, req.body);
+          // ********************************************************
+          // UNCOMMENT BELOW TO ACTIVATE MAILER
+          // ********************************************************
+          // task.recipients = [req.body.assignedTo];
+          // task.subject = "Hello";
+
+          // const mailer = new Mailer(task, emailTemplate(task));
+
+          // mailer.send();
         } else {
-          // check if the user was updated, if so send an email out
-          if (task.assignedTo._id.toString() !== req.body.assignedTo._id) {
-            Object.assign(task, req.body);
-            task.recipients = [req.body.assignedTo];
-            task.subject = "Hello";
-
-            const mailer = new Mailer(task, emailTemplate(task));
-
-            mailer.send();
-          } else {
-            Object.assign(task, req.body);
-          }
-
-          task.save((err, task) => {
-            if (err) {
-              throw err;
-            } else {
-              return res.send(task);
-            }
-          });
+          Object.assign(task, req.body);
         }
-      });
+
+        task.save((err, task) => {
+          if (err) {
+            throw err;
+          } else {
+            return res.send(task);
+          }
+        });
+      }
+    });
   });
 }

@@ -1,3 +1,4 @@
+export const CREATE_ORGANIZATION = 'create_organization';
 export const CREATE_PROJECT = 'create_project';
 export const CREATE_TASK = 'create_task';
 export const DELETE_PROJECT = 'delete_project';

@@ -22,6 +22,13 @@ class Project extends Component {
     this.props.setCurrentProject(projectId);
   }
 
+  // close the open menu if the user clicks on anything that is not part of the menu
+  handleBodyClick = (e) => {
+    if (this.state.optionsMenuVisible && !e.target.classList.contains('toggles')) {
+      this.setState({ optionsMenuVisible: false })
+    }
+  }
+
   handleDeleteClick = () => {
     const { projectId } = this.props.match.params;
 
@@ -76,10 +83,11 @@ class Project extends Component {
     const { currentProject } = this.props;
 
     return (
-      <div className="project-view rel">
+      <div className="project-view rel"
+        onClick={this.handleBodyClick}>
         <div className="header">
           <Link to='/projects' >
-            <i className="material-icons fl">arrow_back_ios</i>
+            <i className="material-icons toggles fl">arrow_back_ios</i>
           </Link>
           <span className="project-name">
             {currentProject.name}
