@@ -13,7 +13,7 @@
     "moment": "^2.22.2",
     "react": "^16.4.1",
     "react-autosuggest": "^9.3.4",
-    "react-dom": "^16.4.1",
+    "react-dom": "^16.4.2",
     "react-google-button": "^0.5.3",
     "react-icons": "^2.2.7",
     "react-redux": "^5.0.7",
