@@ -7,7 +7,7 @@
     "bootstrap": "^4.1.1",
     "glyphicons": "^0.2.0",
     "jquery": "^3.3.1",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.13",
     "material-design-icons": "^3.0.1",
     "materialize-css": "^0.100.2",
     "moment": "^2.22.2",
